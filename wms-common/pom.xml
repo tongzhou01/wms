@@ -12,10 +12,6 @@
     <artifactId>wms-common</artifactId>
     <description>公共模块（工具类/通用系统日志）</description>
 
-    <properties>
-
-    </properties>
-
     <dependencies>
 
         <dependency>
