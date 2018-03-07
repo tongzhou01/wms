@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>wms-parent</artifactId>
+        <groupId>com.mingz-tech.wms</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>wms-web</artifactId>
+    <packaging>war</packaging>
+    <name>wms-web</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 依赖 -->
+        <dependency>
+            <groupId>com.mingz-tech.wms</groupId>
+            <artifactId>wms-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mingz-tech.wms</groupId>
+            <artifactId>wms-shiro</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mingz-tech.wms</groupId>
+            <artifactId>wms-orm</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mingz-tech.wms</groupId>
+            <artifactId>wms-admin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>wms</finalName>
+    </build>
+</project>

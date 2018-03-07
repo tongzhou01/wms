@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wms.iml" filepath="$PROJECT_DIR$/wms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms-admin/wms-admin.iml" filepath="$PROJECT_DIR$/wms-admin/wms-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms-common/wms-common.iml" filepath="$PROJECT_DIR$/wms-common/wms-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms-orm/wms-orm.iml" filepath="$PROJECT_DIR$/wms-orm/wms-orm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms-shiro/wms-shiro.iml" filepath="$PROJECT_DIR$/wms-shiro/wms-shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wms-web/wms-web.iml" filepath="$PROJECT_DIR$/wms-web/wms-web.iml" />
+    </modules>
+  </component>
+</project>
