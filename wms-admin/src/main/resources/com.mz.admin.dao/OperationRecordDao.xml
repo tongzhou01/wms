@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mz.admin.OperationRecordDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.OperationRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cargo_id" jdbcType="BIGINT" property="cargoId" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="outbound_time" jdbcType="TIMESTAMP" property="outboundTime" />
+    <result column="type" jdbcType="TIMESTAMP" property="type" />
+    <result column="outbound_type_id" jdbcType="BIGINT" property="outboundTypeId" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cargo_id, operator, outbound_time, type, outbound_type_id, is_deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from operation_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mz.admin.OperationRecord">
+    insert into operation_record (id, cargo_id, operator, 
+      outbound_time, type, outbound_type_id, 
+      is_deleted)
+    values (#{id,jdbcType=INTEGER}, #{cargoId,jdbcType=BIGINT}, #{operator,jdbcType=VARCHAR}, 
+      #{outboundTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TIMESTAMP}, #{outboundTypeId,jdbcType=BIGINT}, 
+      #{isDeleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mz.admin.OperationRecord">
+    insert into operation_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cargoId != null">
+        cargo_id,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="outboundTime != null">
+        outbound_time,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="outboundTypeId != null">
+        outbound_type_id,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cargoId != null">
+        #{cargoId,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="outboundTime != null">
+        #{outboundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outboundTypeId != null">
+        #{outboundTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.OperationRecord">
+    update operation_record
+    <set>
+      <if test="cargoId != null">
+        cargo_id = #{cargoId,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="outboundTime != null">
+        outbound_time = #{outboundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outboundTypeId != null">
+        outbound_type_id = #{outboundTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.OperationRecord">
+    update operation_record
+    set cargo_id = #{cargoId,jdbcType=BIGINT},
+      operator = #{operator,jdbcType=VARCHAR},
+      outbound_time = #{outboundTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TIMESTAMP},
+      outbound_type_id = #{outboundTypeId,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
