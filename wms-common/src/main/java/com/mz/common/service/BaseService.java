@@ -53,16 +53,6 @@ public abstract class BaseService<T extends IEntity> implements IService<T> {
         return getDao().updateByPrimaryKey(t);
     }
 
-    @Override
-    public T load(Example example) {
-        return getDao().load(example);
-    }
-
-    @Override
-    public List<T> findByExample(Example example) {
-        return getDao().find(example);
-    }
-
     /*---------------------------------------------------↓通用方法↓---------------------------------------------------*/
     @Override
     public List<T> list(Example example) {

@@ -1,5 +1,6 @@
 package com.mz.common.dao;
 
+import com.mz.common.entity.Example;
 import com.mz.common.entity.IEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -19,22 +20,22 @@ public interface BaseDao<T extends IEntity> extends IDao<T> {
     /**
      * 查询一个
      */
-    //T load(Example example);
+    T load(Example example);
 
     /**
      * 查询多个，不分页
      */
-    //List<T> list(Example example);
+    List<T> list(Example example);
 
     /**
      * 查询多个，分页
      */
-    //List<T> find(Example example);
+    List<T> find(Example example);
 
     /**
      * 计数
      */
-    //int count(Example example);
+    int count(Example example);
 
     /**
      * 逻辑删除
