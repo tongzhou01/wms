@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mz.common.dao.BaseDao">
+
+    <!--通用查询条件不要修改！ -->
+
+    <sql id="cond">
+        <where>
+            <if test=" criteria != null ">
+                <foreach collection="criteria" item="criterion">
+                    <choose>
+                        <when test="criterion.type == 1">
+                            and ${criterion.condition} #{criterion.value}
+                        </when>
+                        <when test="criterion.type == 2">
+                            and ${criterion.condition} #{criterion.value[0]}
+                            AND
+                            #{criterion.value[1]}
+                        </when>
+                        <when test="criterion.type == 3">
+                            AND ${criterion.condition} (
+                            <foreach collection="criterion.value" item="listItem"
+                                     separator=",">
+                                #{listItem}
+                            </foreach>
+                            )
+                        </when>
+                        <otherwise>
+                            and ${criterion.condition}
+                        </otherwise>
+                    </choose>
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <!-- 查询一个 -->
+    <select id="load" resultType="java.util.Map">
+        select
+        <foreach collection="columns" item="column" separator=",">
+            <if test=" column != null and column != '' ">
+                ${column}
+            </if>
+        </foreach>
+        from ${tableName}
+        <include refid="cond"/>
+    </select>
+
+    <!-- 查询多个，不分页 -->
+    <select id="list" resultType="java.util.Map">
+        select
+        <foreach collection="columns" item="column" separator=",">
+            <if test=" column != null and column != '' ">
+                ${column}
+            </if>
+        </foreach>
+        from ${tableName}
+        <include refid="cond"/>
+    </select>
+
+
+    <!-- 查询多个，分页 -->
+    <select id="find" resultType="java.util.Map">
+        select
+        <foreach collection="columns" item="column" separator=",">
+            <if test=" column != null and column != '' ">
+                ${column}
+            </if>
+        </foreach>
+        from ${tableName}
+        <include refid="cond"/>
+        <if test="orderBy!=null">
+            order by ${orderBy}
+        </if>
+        <if test="page != null and rows!=null">
+            limit ${(page-1) * rows},${rows}
+        </if>
+    </select>
+
+    <update id="del">
+        update ${tableName} set hidden_status = 0 where id =
+        #{id}
+    </update>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from ${tableName}
+        <include refid="cond"/>
+        <if test="groupBy != null">
+            GROUP BY ${groupBy}
+        </if>
+    </select>
+    <select id="executeSql" parameterType="java.lang.String" resultType="java.util.Map">
+        ${sql}
+    </select>
+</mapper>

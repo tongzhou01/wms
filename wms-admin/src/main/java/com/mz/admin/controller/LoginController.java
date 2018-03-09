@@ -4,10 +4,8 @@ import com.mz.common.entity.R;
 import com.mz.common.util.HttpClientUtil;
 import com.mz.common.util.ValidateCodeUtil;
 import com.mz.common.util.WXPayUtil;
-import com.mz.admin.service.UserInfoService;
 import com.mz.common.util.WebTokenUtil;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +22,8 @@ import java.util.*;
 public class LoginController {
     public static Map<String, String> jedis = new HashMap<String, String>();
     Logger logger = Logger.getLogger(LoginController.class);
-    @Autowired
-    UserInfoService userInfoServiceImpl;
+//    @Autowired
+//    UserInfoService userInfoServiceImpl;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -36,6 +34,7 @@ public class LoginController {
                    @RequestParam(value = "uuid", required = true) String uuid,
                    HttpServletRequest request
     ) {
+        //userInfoServiceImpl.login(username,password,imageCode,uuid);
         return R.ok("ok");
     }
 

@@ -31,6 +31,10 @@
         <mybatis-spring.version>1.2.5</mybatis-spring.version>
         <mysql-connector-java.version>5.1.30</mysql-connector-java.version>
         <jedis.version>2.9.0</jedis.version>
+        <httpclient.version>4.5.3</httpclient.version>
+        <zxing.version>3.3.0</zxing.version>
+        <quartz.version>2.2.3</quartz.version>
+        <gson.version>2.3</gson.version>
     </properties>
 
     <dependencies>
@@ -165,6 +169,51 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
+        </dependency>
+        <!--httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+        <!--二维码生成-->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.1.12</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+        <!--gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <!-- 大于短信 -->
+        <dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>dayu</artifactId>
+            <version>20160820</version>
+        </dependency>
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
         </dependency>
     </dependencies>
     <build>

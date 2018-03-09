@@ -1,6 +1,6 @@
 package com.mz.common.util;
 
-import com.mz.web.util.WXPayConstants.SignType;
+import com.mz.common.util.WXPayConstants.SignType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;

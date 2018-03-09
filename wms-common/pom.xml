@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging>-->
     <artifactId>wms-common</artifactId>
     <description>公共模块（工具类/通用系统日志）</description>
 
