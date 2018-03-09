@@ -12,4 +12,24 @@
     <artifactId>wms-shiro</artifactId>
     <description>用户登陆及权限管理</description>
 
+    <properties>
+        <shiro.version>1.3.2</shiro.version>
+    </properties>
+    <dependencies>
+
+        <!--shiro jar包-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!--shiro jar包 END-->
+
+    </dependencies>
 </project>

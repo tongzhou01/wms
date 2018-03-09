@@ -21,15 +21,15 @@
         <property name="location" value="classpath:jdbc.properties"></property>
     </bean>
 
-    <bean id="prop"
+    <!--<bean id="prop"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <!-- 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 -->
+        &lt;!&ndash; 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 &ndash;&gt;
         <property name="locations">
             <array>
                 <value>classpath:*</value>
             </array>
         </property>
-    </bean>
+    </bean>-->
 
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -54,6 +54,6 @@
         <!-- 读取mybatis配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:*.xml"/>
+        <property name="mapperLocations" value="classpath:com/mz/**/dao/*.xml"/>
     </bean>
 </beans>

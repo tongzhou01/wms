@@ -1,6 +1,6 @@
 package com.mz.shiro.service.impl;
 
-import com.mz.admin.entity.UserInfo;
+import com.mz.shiro.entity.UserInfo;
 import org.springframework.stereotype.Service;
 
 @Service

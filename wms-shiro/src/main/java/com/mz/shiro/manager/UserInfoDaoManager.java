@@ -1,6 +1,6 @@
 package com.mz.shiro.manager;
 
-import com.mz.admin.entity.UserInfo;
+import com.mz.shiro.entity.UserInfo;
 
 public interface UserInfoDaoManager {
     int deleteByPrimaryKey(Long id);
