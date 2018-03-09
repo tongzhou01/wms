@@ -11,9 +11,6 @@
     <modules>
         <module>wms-common</module>
         <module>wms-admin</module>
-        <module>wms-orm</module>
-        <module>wms-web</module>
-        <module>wms-shiro</module>
         <module>wms-web</module>
     </modules>
 
@@ -33,6 +30,7 @@
         <!-- mybatis-spring版本号 -->
         <mybatis-spring.version>1.2.5</mybatis-spring.version>
         <mysql-connector-java.version>5.1.30</mysql-connector-java.version>
+        <jedis.version>2.9.0</jedis.version>
     </properties>
 
     <dependencies>
@@ -156,6 +154,17 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        <!-- redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
         </dependency>
     </dependencies>
     <build>

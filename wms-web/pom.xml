@@ -31,18 +31,6 @@
 
         <dependency>
             <groupId>com.mingz-tech.wms</groupId>
-            <artifactId>wms-shiro</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mingz-tech.wms</groupId>
-            <artifactId>wms-orm</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mingz-tech.wms</groupId>
             <artifactId>wms-admin</artifactId>
             <version>${project.version}</version>
         </dependency>
