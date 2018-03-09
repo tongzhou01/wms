@@ -1,8 +1,10 @@
 package com.mz.admin.entity;
 
+import com.mz.common.entity.IEntity;
+
 import java.util.Date;
 
-public class OutboundType {
+public class OutboundType implements IEntity {
     private Long id;
 
     private String outboundType;

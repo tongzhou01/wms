@@ -1,12 +1,14 @@
 package com.mz.admin.entity;
 
+import com.mz.common.entity.IEntity;
+
 import java.util.Date;
 /**
  * @description 顾客信息
  * @author tongzhou
  * @date 2018/3/8 11:31
  */
-public class CustomerInfo {
+public class CustomerInfo implements IEntity {
     private Long id;
 
     private String customerNo;

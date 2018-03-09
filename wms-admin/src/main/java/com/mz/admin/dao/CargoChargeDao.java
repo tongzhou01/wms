@@ -1,17 +1,8 @@
 package com.mz.admin.dao;
 
 import com.mz.admin.entity.CargoCharge;
+import com.mz.common.dao.IDao;
 
-public interface CargoChargeDao {
-    int deleteByPrimaryKey(Long id);
+public interface CargoChargeDao extends IDao<CargoCharge>{
 
-    int insert(CargoCharge record);
-
-    int insertSelective(CargoCharge record);
-
-    CargoCharge selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(CargoCharge record);
-
-    int updateByPrimaryKey(CargoCharge record);
 }

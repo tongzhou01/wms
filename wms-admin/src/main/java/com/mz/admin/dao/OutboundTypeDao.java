@@ -1,17 +1,8 @@
 package com.mz.admin.dao;
 
 import com.mz.admin.entity.OutboundType;
+import com.mz.common.dao.IDao;
 
-public interface OutboundTypeDao {
-    int deleteByPrimaryKey(Long id);
+public interface OutboundTypeDao extends IDao<OutboundType>{
 
-    int insert(OutboundType record);
-
-    int insertSelective(OutboundType record);
-
-    OutboundType selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(OutboundType record);
-
-    int updateByPrimaryKey(OutboundType record);
 }

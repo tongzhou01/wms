@@ -1,14 +1,16 @@
 package com.mz.admin.entity;
 
+import com.mz.common.entity.IEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @description 货物信息
  * @author tongzhou
+ * @description 货物信息
  * @date 2018/3/8 11:30
  */
-public class CargoInfo {
+public class CargoInfo implements IEntity {
     private Long id;
 
     private String cnNo;

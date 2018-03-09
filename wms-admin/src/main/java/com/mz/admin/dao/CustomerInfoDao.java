@@ -1,17 +1,7 @@
 package com.mz.admin.dao;
 
 import com.mz.admin.entity.CustomerInfo;
+import com.mz.common.dao.IDao;
 
-public interface CustomerInfoDao {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(CustomerInfo record);
-
-    int insertSelective(CustomerInfo record);
-
-    CustomerInfo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(CustomerInfo record);
-
-    int updateByPrimaryKey(CustomerInfo record);
+public interface CustomerInfoDao extends IDao<CustomerInfo>{
 }

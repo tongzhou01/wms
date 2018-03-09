@@ -1,10 +1,13 @@
 package com.mz.admin.entity;
+
+import com.mz.common.entity.IEntity;
+
 /**
  * @description 快递公司信息
  * @author tongzhou
  * @date 2018/3/8 11:31
  */
-public class ExpressCompany {
+public class ExpressCompany implements IEntity {
     private Long id;
 
     private String companyName;

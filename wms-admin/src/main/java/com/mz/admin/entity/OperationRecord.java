@@ -1,8 +1,10 @@
 package com.mz.admin.entity;
 
+import com.mz.common.entity.IEntity;
+
 import java.util.Date;
 
-public class OperationRecord {
+public class OperationRecord implements IEntity {
     private Integer id;
 
     private Long cargoId;

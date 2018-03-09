@@ -1,17 +1,8 @@
 package com.mz.admin.dao;
 
 import com.mz.admin.entity.CargoInfo;
+import com.mz.common.dao.IDao;
 
-public interface CargoInfoDao {
-    int deleteByPrimaryKey(Long id);
+public interface CargoInfoDao extends IDao<CargoInfo>{
 
-    int insert(CargoInfo record);
-
-    int insertSelective(CargoInfo record);
-
-    CargoInfo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(CargoInfo record);
-
-    int updateByPrimaryKey(CargoInfo record);
 }

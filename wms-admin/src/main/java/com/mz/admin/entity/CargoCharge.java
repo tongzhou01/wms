@@ -1,12 +1,14 @@
 package com.mz.admin.entity;
 
+import com.mz.common.entity.IEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * 仓管费配置
  */
-public class CargoCharge {
+public class CargoCharge implements IEntity{
     private Long id;
 
     private Byte expireTime;
