@@ -48,6 +48,12 @@
         <property name="maxWait" value="${maxWait}"/>
     </bean>
 
+    <!-- 自动扫描dao接口，生成MapperFactoryBean -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mz.**.dao"/>
+        <!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/> -->
+    </bean>
+
     <!-- spring和MyBatis整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>

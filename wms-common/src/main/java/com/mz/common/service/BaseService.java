@@ -4,6 +4,7 @@ import com.mz.common.dao.BaseDao;
 import com.mz.common.dao.IDao;
 import com.mz.common.entity.Example;
 import com.mz.common.entity.IEntity;
+import com.mz.common.service.IService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

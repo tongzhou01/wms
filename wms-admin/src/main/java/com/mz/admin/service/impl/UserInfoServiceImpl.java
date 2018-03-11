@@ -18,7 +18,7 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
 
     @Override
     public IDao<UserInfo> getDao() {
-        return userInfoDao;
+        return null;
     }
 
     /*@Override
