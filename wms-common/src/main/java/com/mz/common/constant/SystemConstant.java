@@ -78,7 +78,7 @@ public class SystemConstant {
 
         private int value;
 
-        ScheduleStatus(int value) {
+        private ScheduleStatus(int value) {
             this.value = value;
         }
         
@@ -109,7 +109,7 @@ public class SystemConstant {
     	
     	private int value;
     	
-    	MacroType(int value) {
+    	private MacroType(int value) {
             this.value = value;
         }
         
@@ -151,7 +151,7 @@ public class SystemConstant {
     	
     	private int value;
     	
-    	StatusType(int value) {
+    	private StatusType(int value) {
             this.value = value;
         }
         

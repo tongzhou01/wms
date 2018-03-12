@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mz.admin.CargoChargeDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.CargoCharge">
+<mapper namespace="com.mz.admin.dao.CargoChargeDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.entity.CargoCharge">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="expire_time" jdbcType="TINYINT" property="expireTime" />
     <result column="cargo_fee" jdbcType="DECIMAL" property="cargoFee" />
@@ -22,7 +22,7 @@
     delete from cargo_charge
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mz.admin.CargoCharge">
+  <insert id="insert" parameterType="com.mz.admin.entity.CargoCharge">
     insert into cargo_charge (id, expire_time, cargo_fee, 
       gmt_create, gmt_modify, is_deleted
       )
@@ -30,7 +30,7 @@
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.CargoCharge">
+  <insert id="insertSelective" parameterType="com.mz.admin.entity.CargoCharge">
     insert into cargo_charge
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.CargoCharge">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.CargoCharge">
     update cargo_charge
     <set>
       <if test="expireTime != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.CargoCharge">
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.CargoCharge">
     update cargo_charge
     set expire_time = #{expireTime,jdbcType=TINYINT},
       cargo_fee = #{cargoFee,jdbcType=DECIMAL},

@@ -31,6 +31,7 @@
         <mybatis-spring.version>1.2.5</mybatis-spring.version>
         <mysql-connector-java.version>5.1.30</mysql-connector-java.version>
         <jedis.version>2.9.0</jedis.version>
+        <spring-data-redis.version>1.6.2.RELEASE</spring-data-redis.version>
         <httpclient.version>4.5.3</httpclient.version>
         <zxing.version>3.3.0</zxing.version>
         <quartz.version>2.2.3</quartz.version>
@@ -170,6 +171,11 @@
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring-data-redis.version}</version>
+        </dependency>
         <!--httpclient-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -214,6 +220,14 @@
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
             <version>2.5.0</version>
+        </dependency>
+        <!--junit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <!-- 表示开发的时候引入，发布的时候不会加载此包 -->
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

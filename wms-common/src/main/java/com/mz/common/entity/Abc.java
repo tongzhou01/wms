@@ -62,6 +62,7 @@ public class Abc {
     }
 
     public static void main(String... args) {
-        System.out.println(abc("aBcAbCabCABc"));
+        System.out.println(abc("ABcAbCabCABc"));
+        System.out.println(aBc("a_bcAbCabCABc"));
     }
 }

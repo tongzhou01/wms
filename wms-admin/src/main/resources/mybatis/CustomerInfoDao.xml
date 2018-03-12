@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mz.admin.CustomerInfoDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.CustomerInfo">
+<mapper namespace="com.mz.admin.dao.CustomerInfoDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.entity.CustomerInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="customer_no" jdbcType="VARCHAR" property="customerNo" />
     <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
@@ -27,7 +27,7 @@
     delete from customer_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mz.admin.CustomerInfo">
+  <insert id="insert" parameterType="com.mz.admin.entity.CustomerInfo">
     insert into customer_info (id, customer_no, customer_name, 
       customer_mobile, customer_company, customer_postcode, 
       customer_address, gmt_create, gmt_modify, 
@@ -37,7 +37,7 @@
       #{customerAddress,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
       #{isDeleted,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.CustomerInfo">
+  <insert id="insertSelective" parameterType="com.mz.admin.entity.CustomerInfo">
     insert into customer_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.CustomerInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.CustomerInfo">
     update customer_info
     <set>
       <if test="customerNo != null">
@@ -137,7 +137,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.CustomerInfo">
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.CustomerInfo">
     update customer_info
     set customer_no = #{customerNo,jdbcType=VARCHAR},
       customer_name = #{customerName,jdbcType=VARCHAR},

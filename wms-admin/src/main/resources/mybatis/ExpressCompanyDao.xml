@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mz.admin.ExpressCompanyDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.ExpressCompany">
+<mapper namespace="com.mz.admin.dao.ExpressCompanyDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.entity.ExpressCompany">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
@@ -22,7 +22,7 @@
     delete from express_company
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mz.admin.ExpressCompany">
+  <insert id="insert" parameterType="com.mz.admin.entity.ExpressCompany">
     insert into express_company (id, company_name, company_code, 
       remark, is_deleted, type
       )
@@ -30,7 +30,7 @@
       #{remark,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.ExpressCompany">
+  <insert id="insertSelective" parameterType="com.mz.admin.entity.ExpressCompany">
     insert into express_company
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.ExpressCompany">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.ExpressCompany">
     update express_company
     <set>
       <if test="companyName != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.ExpressCompany">
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.ExpressCompany">
     update express_company
     set company_name = #{companyName,jdbcType=VARCHAR},
       company_code = #{companyCode,jdbcType=VARCHAR},

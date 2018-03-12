@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mz.admin.CargoInfoDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.CargoInfo">
+<mapper namespace="com.mz.admin.dao.CargoInfoDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.entity.CargoInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="cn_no" jdbcType="VARCHAR" property="cnNo" />
     <result column="intl_no" jdbcType="VARCHAR" property="intlNo" />
@@ -39,7 +39,7 @@
     delete from cargo_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.mz.admin.CargoInfo">
+  <insert id="insert" parameterType="com.mz.admin.entity.CargoInfo">
     insert into cargo_info (id, cn_no, intl_no, 
       order_no, customer_name, customer_no, 
       express_company_code, express_company, shelf_no, 
@@ -57,7 +57,7 @@
       #{gmtModify,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.CargoInfo">
+  <insert id="insertSelective" parameterType="com.mz.admin.entity.CargoInfo">
     insert into cargo_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -190,7 +190,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.CargoInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.CargoInfo">
     update cargo_info
     <set>
       <if test="cnNo != null">
@@ -256,7 +256,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.CargoInfo">
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.CargoInfo">
     update cargo_info
     set cn_no = #{cnNo,jdbcType=VARCHAR},
       intl_no = #{intlNo,jdbcType=VARCHAR},

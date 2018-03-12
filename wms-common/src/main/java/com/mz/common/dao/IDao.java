@@ -1,7 +1,6 @@
 package com.mz.common.dao;
 
 import com.mz.common.entity.Example;
-import com.mz.common.entity.IEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.Map;
  * 基础数据访问层接口<br>
  * Created by tongzhou on 2017-09-12.
  */
-public interface IDao<T extends IEntity> {
+public interface IDao<T> {
 
     /**
      * 物理删除
