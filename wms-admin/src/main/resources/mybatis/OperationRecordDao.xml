@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mz.admin.dao.OperationRecordDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.entity.OperationRecord">
+<mapper namespace="com.mz.admin.dao.OperateRecordDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.entity.OperateRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="cargo_id" jdbcType="BIGINT" property="cargoId" />
     <result column="operator" jdbcType="VARCHAR" property="operator" />
@@ -23,7 +23,7 @@
     delete from operation_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mz.admin.entity.OperationRecord">
+  <insert id="insert" parameterType="com.mz.admin.entity.OperateRecord">
     insert into operation_record (id, cargo_id, operator, 
       outbound_time, type, outbound_type_id, 
       is_deleted)
@@ -31,7 +31,7 @@
       #{outboundTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TIMESTAMP}, #{outboundTypeId,jdbcType=BIGINT}, 
       #{isDeleted,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.entity.OperationRecord">
+  <insert id="insertSelective" parameterType="com.mz.admin.entity.OperateRecord">
     insert into operation_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.OperationRecord">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.OperateRecord">
     update operation_record
     <set>
       <if test="cargoId != null">
@@ -104,7 +104,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OperationRecord">
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OperateRecord">
     update operation_record
     set cargo_id = #{cargoId,jdbcType=BIGINT},
       operator = #{operator,jdbcType=VARCHAR},

@@ -1,13 +1,5 @@
 package com.mz.common.constant;
 
-/**
- * 系统级静态变量
- *
- * @author ZhouChenglin
- * @email yczclcn@163.com
- * @url www.chenlintech.com
- * @date 2017年8月8日 下午1:35:38
- */
 public class SystemConstant {
 	
 	/**
@@ -18,21 +10,13 @@ public class SystemConstant {
 	/**
 	 * 数据标识
 	 */
-	public static final String DATA_ROWS = "rows";
+	public static final String DATA_ROWS = "data";
 	
 	/**
 	 * 未授权错误代码
 	 */
 	public static final int UNAUTHORIZATION_CODE = 401;
-	
-	/**
-	 * 菜单类型
-	 *
-	 * @author ZhouChenglin
-	 * @email: yczclcn@163.com
-	 * @url: www.chenlintech.com
-	 * @date 2017年8月8日 下午1:36:27
-	 */
+
     public enum MenuType {
         /**
          * 目录
@@ -57,15 +41,7 @@ public class SystemConstant {
             return value;
         }
     }
-    
-    /**
-     * 定时任务状态
-     *
-     * @author ZhouChenglin
-     * @email: yczclcn@163.com
-     * @url: www.chenlintech.com
-     * @date 2017年8月8日 下午1:36:17
-     */
+
     public enum ScheduleStatus {
         /**
          * 正常
@@ -86,15 +62,7 @@ public class SystemConstant {
             return value;
         }
     }
-    
-    /**
-     * 通用字典
-     *
-     * @author ZhouChenglin
-     * @email yczclcn@163.com
-     * @url www.chenlintech.com
-     * @date 2017年8月15日 下午7:29:02
-     */
+
     public enum MacroType {
     	
     	/**
@@ -118,15 +86,7 @@ public class SystemConstant {
         }
     	
     }
-    
-    /**
-     * 通用变量，表示可用、禁用、显示、隐藏
-     *
-     * @author ZhouChenglin
-     * @email yczclcn@163.com
-     * @url www.chenlintech.com
-     * @date 2017年8月15日 下午7:31:49
-     */
+
     public enum StatusType {
     	
     	/**

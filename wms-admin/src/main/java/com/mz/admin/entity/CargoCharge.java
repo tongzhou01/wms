@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 仓管费配置
  */
-public class CargoCharge implements IEntity{
+public class CargoCharge implements IEntity {
     private Long id;
 
     private Byte expireTime;

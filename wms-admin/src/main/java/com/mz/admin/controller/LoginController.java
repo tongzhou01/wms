@@ -23,6 +23,7 @@ public class LoginController {
 
     /**
      * 账号密码登陆
+     *
      * @param username
      * @param password
      * @param imageCode
@@ -36,13 +37,13 @@ public class LoginController {
                    @RequestParam(value = "imageCode") String imageCode,
                    @RequestParam(value = "uuid") String uuid
     ) {
-        userInfoService.login(username, password, imageCode, uuid);
-        return R.ok("ok");
+        return userInfoService.login(username, password, imageCode, uuid);
     }
 
 
     /**
      * 获取验证码
+     *
      * @param uuid
      * @param response
      */

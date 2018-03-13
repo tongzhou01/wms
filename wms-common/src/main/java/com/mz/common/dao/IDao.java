@@ -1,6 +1,7 @@
 package com.mz.common.dao;
 
 import com.mz.common.entity.Example;
+import com.mz.common.entity.QueryParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -95,4 +96,6 @@ public interface IDao<T> {
      * 直接执行sql
      */
     List<Map<String, Object>> executeSql(@Param("sql") String sql);
+
+    List<T> index(QueryParam queryParam);
 }

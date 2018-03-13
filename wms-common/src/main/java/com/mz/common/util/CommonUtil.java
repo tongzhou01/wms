@@ -6,11 +6,6 @@ import com.mz.common.entity.R;
 
 /**
  * 通用工具类
- *
- * @author ZhouChenglin
- * @email yczclcn@163.com
- * @url www.chenlintech.com
- * @date 2017年8月12日 下午1:34:44
  */
 public class CommonUtil {
 

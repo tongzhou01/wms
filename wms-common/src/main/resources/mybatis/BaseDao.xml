@@ -3,7 +3,6 @@
 <mapper namespace="com.mz.common.dao.BaseDao">
 
     <!--通用查询条件不要修改！ -->
-
     <sql id="cond">
         <where>
             <if test=" criteria != null ">
@@ -78,7 +77,7 @@
     </select>
 
     <update id="del">
-        update ${tableName} set hidden_status = 0 where id =
+        update ${tableName} set is_deleted = 1 where id =
         #{id}
     </update>
 
@@ -92,4 +91,5 @@
     <select id="executeSql" parameterType="java.lang.String" resultType="java.util.Map">
         ${sql}
     </select>
+
 </mapper>

@@ -1,12 +1,9 @@
 package com.mz.common.service;
 
-import com.mz.common.dao.BaseDao;
 import com.mz.common.dao.IDao;
 import com.mz.common.entity.Example;
-import com.mz.common.entity.IEntity;
-import com.mz.common.service.IService;
+import com.mz.common.entity.QueryParam;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +14,7 @@ import java.util.Map;
  * Created by tongzhou on 2017-09-12.
  */
 @Service
-public abstract class BaseService<T extends IEntity> implements IService<T> {
-
-    @Autowired
-    private BaseDao<T> baseDao;
+public abstract class BaseService<T> implements IService<T> {
 
     public abstract IDao<T> getDao();
 
@@ -54,42 +48,41 @@ public abstract class BaseService<T extends IEntity> implements IService<T> {
         return getDao().updateByPrimaryKey(t);
     }
 
+    /*---------------------------------------------------↓BaseDao通用方法↓---------------------------------------------------*/
     @Override
     public T load(Example example) {
         return getDao().load(example);
     }
 
     @Override
-    public List<T> findByExample(Example example) {
-        return getDao().find(example);
-    }
-
-    /*---------------------------------------------------↓通用方法↓---------------------------------------------------*/
-    @Override
     public List<T> list(Example example) {
-        return baseDao.list(example);
+        return getDao().list(example);
     }
 
     @Override
     public List<T> find(Example example) {
-        return baseDao.find(example);
+        return getDao().find(example);
     }
 
     @Override
     public int count(Example example) {
-        return baseDao.count(example);
+        return getDao().count(example);
     }
 
     @Override
     public int del(String tableName, Integer id) {
-        return baseDao.del(tableName, id);
+        return getDao().del(tableName, id);
     }
 
     /**
      * 直接执行sql
      */
     public List<Map<String, Object>> executeSql(@Param("sql") String sql) {
-        return baseDao.executeSql(sql);
+        return getDao().executeSql(sql);
     }
 
+    @Override
+    public List<T> index(QueryParam queryParam) {
+        return getDao().index(queryParam);
+    }
 }

@@ -1,7 +1,7 @@
 package com.mz.common.service;
 
 import com.mz.common.entity.Example;
-import com.mz.common.entity.IEntity;
+import com.mz.common.entity.QueryParam;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  * 基础数据访问层接口<br>
  * Created by tongzhou on 2017-09-12.
  */
-public interface IService<T extends IEntity> {
+public interface IService<T> {
 
     /**
      * 查询一个
@@ -99,5 +99,12 @@ public interface IService<T extends IEntity> {
      * @param example
      * @return
      */
-    List<T> findByExample(Example example);
+    //List<T> findByExample(Example example);
+
+    /**
+     * 通用参数查询
+     * @param queryParam
+     * @return
+     */
+    List<T> index(QueryParam queryParam);
 }

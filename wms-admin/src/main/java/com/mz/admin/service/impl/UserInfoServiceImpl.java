@@ -47,9 +47,9 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
             example.equal("password", MD5Util.MD5Encode(password));
             Map userInfoMap = baseDao.load(example);
             String token = WebTokenUtil.createJavaWebToken(userInfoMap);
-            return CommonUtil.msg(userInfoMap).put("token",token);
+            return CommonUtil.msg(userInfoMap).put("token", token);
         } else {
-            return R.error(500,"验证码错误");
+            return R.error(500, "验证码错误");
         }
     }
 

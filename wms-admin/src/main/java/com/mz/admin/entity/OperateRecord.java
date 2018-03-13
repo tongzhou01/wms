@@ -4,7 +4,7 @@ import com.mz.common.entity.IEntity;
 
 import java.util.Date;
 
-public class OperationRecord implements IEntity {
+public class OperateRecord implements IEntity {
     private Integer id;
 
     private Long cargoId;
