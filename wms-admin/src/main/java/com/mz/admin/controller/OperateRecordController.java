@@ -1,7 +1,7 @@
 package com.mz.admin.controller;
 
-import com.mz.admin.entity.CargoInfo;
-import com.mz.admin.service.CargoInfoService;
+import com.mz.admin.entity.OperateRecord;
+import com.mz.admin.service.OperateRecordService;
 import com.mz.common.entity.Example;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
@@ -13,17 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 货物操作
+ * 货物操作记录
  *
  * @author tongzhou
  * @date 2018-03-13 10:16
  **/
 @RestController
-@RequestMapping("/api/cargo/ops/")
-public class CargoOperateController {
+@RequestMapping("/api/cargo/ops_record/")
+public class OperateRecordController {
 
     @Autowired
-    CargoInfoService cargoInfoService;
+    OperateRecordService operateRecordService;
     @Autowired
     IService<Map<String, Object>> baseService;
 
@@ -34,8 +34,6 @@ public class CargoOperateController {
      * @param rows
      * @param startDate
      * @param endDate
-     * @param orderNo
-     * @param customerNo
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
@@ -43,16 +41,10 @@ public class CargoOperateController {
                   @RequestParam(value = "page", required = false) Integer page,
                   @RequestParam(value = "rows", required = false) Integer rows,
                   @RequestParam(value = "startDate", required = false) String startDate,
-                  @RequestParam(value = "endDate", required = false) String endDate,
-                  @RequestParam(value = "orderNo", required = false) Integer orderNo,
-                  @RequestParam(value = "customerNo", required = false) Integer customerNo
+                  @RequestParam(value = "endDate", required = false) String endDate
     ) {
-        Example example = Example.create(CargoInfo.class);
+        Example example = Example.create(OperateRecord.class);
         example.equal("is_deleted", 0);
-        if (orderNo != null)
-            example.like("order_no", "%" + orderNo + "%");
-        if (customerNo != null)
-            example.like("customer_no", "%" + customerNo + "%");
         if (page != null && rows != null) {
             example.setPage(page);
             example.setPage(rows);
@@ -69,12 +61,12 @@ public class CargoOperateController {
     /**
      * 新增
      *
-     * @param cargoInfo
+     * @param operateRecord
      * @return
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public R add(@RequestBody CargoInfo cargoInfo) {
-        int i = cargoInfoService.insertSelective(cargoInfo);
+    public R add(@RequestBody OperateRecord operateRecord) {
+        int i = operateRecordService.insertSelective(operateRecord);
         return CommonUtil.msg(i);
     }
 
@@ -86,19 +78,19 @@ public class CargoOperateController {
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
     public R getById(@RequestParam Integer id) {
-        CargoInfo cargoInfo = cargoInfoService.selectByPrimaryKey(id);
-        return CommonUtil.msg(cargoInfo);
+        OperateRecord operateRecord = operateRecordService.selectByPrimaryKey(id);
+        return CommonUtil.msg(operateRecord);
     }
 
     /**
      * 修改
      *
-     * @param cargoInfo
+     * @param operateRecord
      * @return
      */
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public R edit(@RequestBody CargoInfo cargoInfo) {
-        int i = cargoInfoService.updateByPrimaryKeySelective(cargoInfo);
+    public R edit(@RequestBody OperateRecord operateRecord) {
+        int i = operateRecordService.updateByPrimaryKeySelective(operateRecord);
         return CommonUtil.msg(i);
     }
 
@@ -112,7 +104,7 @@ public class CargoOperateController {
     public R del(@RequestBody Integer[] ids) {
         int i = 0;
         for (int id : ids) {
-            i += baseService.del("cargo_info", id);
+            i += baseService.del("operate_record", id);
         }
         return CommonUtil.msg(ids, i);
     }

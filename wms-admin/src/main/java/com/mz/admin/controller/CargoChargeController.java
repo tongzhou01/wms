@@ -7,19 +7,18 @@ import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 货物操作
+ * 仓管费
  *
  * @author tongzhou
  * @date 2018-03-13 10:16
  **/
-@Controller
+@RestController
 @RequestMapping("/api/cargo/charge/")
 public class CargoChargeController {
 
@@ -40,7 +39,6 @@ public class CargoChargeController {
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    @ResponseBody
     public R list(//@RequestBody Map<String, Object> param
                   @RequestParam(value = "page", required = false) Integer page,
                   @RequestParam(value = "rows", required = false) Integer rows,
@@ -75,7 +73,6 @@ public class CargoChargeController {
      * @return
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    @ResponseBody
     public R add(@RequestBody CargoCharge cargoCharge) {
         int i = cargoChargeService.insertSelective(cargoCharge);
         return CommonUtil.msg(i);
@@ -88,7 +85,6 @@ public class CargoChargeController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    @ResponseBody
     public R getById(@RequestParam Integer id) {
         CargoCharge cargoCharge = cargoChargeService.selectByPrimaryKey(id);
         return CommonUtil.msg(cargoCharge);
@@ -101,7 +97,6 @@ public class CargoChargeController {
      * @return
      */
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    @ResponseBody
     public R edit(@RequestBody CargoCharge cargoCharge) {
         int i = cargoChargeService.updateByPrimaryKeySelective(cargoCharge);
         return CommonUtil.msg(i);
@@ -114,7 +109,6 @@ public class CargoChargeController {
      * @return
      */
     @RequestMapping(value = "del", method = RequestMethod.DELETE)
-    @ResponseBody
     public R del(@RequestBody Integer[] ids) {
         int i = 0;
         for (int id : ids) {

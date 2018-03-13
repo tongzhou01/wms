@@ -1,7 +1,7 @@
 package com.mz.admin.controller;
 
-import com.mz.admin.entity.CargoInfo;
-import com.mz.admin.service.CargoInfoService;
+import com.mz.admin.entity.ExpressCompany;
+import com.mz.admin.service.ExpressCompanyService;
 import com.mz.common.entity.Example;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
@@ -13,17 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 货物操作
+ * 快递公司
  *
  * @author tongzhou
  * @date 2018-03-13 10:16
  **/
 @RestController
-@RequestMapping("/api/cargo/ops/")
-public class CargoOperateController {
+@RequestMapping("/api/express/")
+public class ExpressCompanyController {
 
     @Autowired
-    CargoInfoService cargoInfoService;
+    ExpressCompanyService expressCompanyService;
     @Autowired
     IService<Map<String, Object>> baseService;
 
@@ -47,7 +47,7 @@ public class CargoOperateController {
                   @RequestParam(value = "orderNo", required = false) Integer orderNo,
                   @RequestParam(value = "customerNo", required = false) Integer customerNo
     ) {
-        Example example = Example.create(CargoInfo.class);
+        Example example = Example.create(ExpressCompany.class);
         example.equal("is_deleted", 0);
         if (orderNo != null)
             example.like("order_no", "%" + orderNo + "%");
@@ -69,12 +69,12 @@ public class CargoOperateController {
     /**
      * 新增
      *
-     * @param cargoInfo
+     * @param expressCompany
      * @return
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public R add(@RequestBody CargoInfo cargoInfo) {
-        int i = cargoInfoService.insertSelective(cargoInfo);
+    public R add(@RequestBody ExpressCompany expressCompany) {
+        int i = expressCompanyService.insertSelective(expressCompany);
         return CommonUtil.msg(i);
     }
 
@@ -86,19 +86,19 @@ public class CargoOperateController {
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
     public R getById(@RequestParam Integer id) {
-        CargoInfo cargoInfo = cargoInfoService.selectByPrimaryKey(id);
-        return CommonUtil.msg(cargoInfo);
+        ExpressCompany expressCompany = expressCompanyService.selectByPrimaryKey(id);
+        return CommonUtil.msg(expressCompany);
     }
 
     /**
      * 修改
      *
-     * @param cargoInfo
+     * @param expressCompany
      * @return
      */
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public R edit(@RequestBody CargoInfo cargoInfo) {
-        int i = cargoInfoService.updateByPrimaryKeySelective(cargoInfo);
+    public R edit(@RequestBody ExpressCompany expressCompany) {
+        int i = expressCompanyService.updateByPrimaryKeySelective(expressCompany);
         return CommonUtil.msg(i);
     }
 
@@ -112,7 +112,7 @@ public class CargoOperateController {
     public R del(@RequestBody Integer[] ids) {
         int i = 0;
         for (int id : ids) {
-            i += baseService.del("cargo_info", id);
+            i += baseService.del("express_company", id);
         }
         return CommonUtil.msg(ids, i);
     }

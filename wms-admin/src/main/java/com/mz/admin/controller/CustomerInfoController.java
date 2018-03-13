@@ -7,7 +7,6 @@ import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.Map;
  * @author tongzhou
  * @date 2018-03-13 10:16
  **/
-@Controller
+@RestController
 @RequestMapping("/api/customer/")
 public class CustomerInfoController {
 
@@ -35,12 +34,11 @@ public class CustomerInfoController {
      * @param rows
      * @param startDate
      * @param endDate
-     * @param orderNo
+     * @param customerName
      * @param customerNo
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    @ResponseBody
     public R list(//@RequestBody Map<String, Object> param
                   @RequestParam(value = "page", required = false) Integer page,
                   @RequestParam(value = "rows", required = false) Integer rows,
@@ -74,7 +72,6 @@ public class CustomerInfoController {
      * @return
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    @ResponseBody
     public R add(@RequestBody CustomerInfo customerInfo) {
         int i = customerInfoService.insertSelective(customerInfo);
         return CommonUtil.msg(i);
@@ -87,7 +84,6 @@ public class CustomerInfoController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    @ResponseBody
     public R getById(@RequestParam Integer id) {
         CustomerInfo customerInfo = customerInfoService.selectByPrimaryKey(id);
         return CommonUtil.msg(customerInfo);
@@ -100,7 +96,6 @@ public class CustomerInfoController {
      * @return
      */
     @RequestMapping(value = "edit", method = RequestMethod.POST)
-    @ResponseBody
     public R edit(@RequestBody CustomerInfo customerInfo) {
         int i = customerInfoService.updateByPrimaryKeySelective(customerInfo);
         return CommonUtil.msg(i);
@@ -113,7 +108,6 @@ public class CustomerInfoController {
      * @return
      */
     @RequestMapping(value = "del", method = RequestMethod.DELETE)
-    @ResponseBody
     public R del(@RequestBody Integer[] ids) {
         int i = 0;
         for (int id : ids) {
@@ -122,6 +116,4 @@ public class CustomerInfoController {
         return CommonUtil.msg(ids, i);
     }
 
-    public static void main(String[] args) {
-    }
 }
