@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 货物操作记录
+ * 出库类型
  *
  * @author tongzhou
  * @date 2018-03-13 10:16
@@ -77,7 +77,7 @@ public class OutboundTypeController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public R getById(@RequestParam Integer id) {
+    public R getById(@RequestParam Long id) {
         OutboundType outboundType = outboundTypeService.selectByPrimaryKey(id);
         return CommonUtil.msg(outboundType);
     }

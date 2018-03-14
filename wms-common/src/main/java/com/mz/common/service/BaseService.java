@@ -34,7 +34,7 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public T selectByPrimaryKey(Integer id) {
+    public T selectByPrimaryKey(Long id) {
         return getDao().selectByPrimaryKey(id);
     }
 

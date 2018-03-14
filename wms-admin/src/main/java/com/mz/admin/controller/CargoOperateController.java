@@ -19,7 +19,7 @@ import java.util.Map;
  * @date 2018-03-13 10:16
  **/
 @RestController
-@RequestMapping("/api/cargo/ops/")
+@RequestMapping("/api/cargo/")
 public class CargoOperateController {
 
     @Autowired
@@ -61,7 +61,7 @@ public class CargoOperateController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
-        int count = baseService.count(example);
+        //int count = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list);
     }
@@ -85,7 +85,7 @@ public class CargoOperateController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public R getById(@RequestParam Integer id) {
+    public R getById(@RequestParam Long id) {
         CargoInfo cargoInfo = cargoInfoService.selectByPrimaryKey(id);
         return CommonUtil.msg(cargoInfo);
     }

@@ -85,7 +85,7 @@ public class CargoChargeController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public R getById(@RequestParam Integer id) {
+    public R getById(@RequestParam Long id) {
         CargoCharge cargoCharge = cargoChargeService.selectByPrimaryKey(id);
         return CommonUtil.msg(cargoCharge);
     }

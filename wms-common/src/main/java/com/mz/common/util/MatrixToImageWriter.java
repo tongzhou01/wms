@@ -1,9 +1,6 @@
 package com.mz.common.util;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import org.apache.log4j.Logger;
 
@@ -55,22 +52,20 @@ public class MatrixToImageWriter {
     }
 
     public static void writeToStream(BitMatrix matrix, String format, OutputStream stream) throws IOException {
-
         BufferedImage image = toBufferedImage(matrix);
-        //设置logo图标
-        /*QRCodeFactory logoConfig = new QRCodeFactory();
-        image = logoConfig.setMatrixLogo(image, logUri);*/
+        //image = BarcodeUtil.setBarcodeNumber(image,"321341546466");
         if (!ImageIO.write(image, format, stream)) {
             throw new IOException("Could not write an image of format " + format);
         }
     }
 
-    public static void createPayQr(String qrCode, int width, int height, String format, HttpServletResponse response) {
+    public static void createPayQr(String qrCode, int width, int height, BarcodeFormat barFormat, String format, HttpServletResponse response) {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+        hints.put(EncodeHintType.MARGIN,1);
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = new MultiFormatWriter().encode(qrCode, BarcodeFormat.QR_CODE, width, height, hints);
+            bitMatrix = new MultiFormatWriter().encode(qrCode, barFormat, width, height, hints);
             MatrixToImageWriter.writeToStream(bitMatrix, format, response.getOutputStream());
         } catch (IOException e) {
             logger.error("IO异常");

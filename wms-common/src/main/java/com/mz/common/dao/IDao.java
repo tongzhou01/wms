@@ -44,7 +44,7 @@ public interface IDao<T> {
      * @param id
      * @return
      */
-    T selectByPrimaryKey(Integer id);
+    T selectByPrimaryKey(Long id);
 
     /**
      * 更新（自定义参数）

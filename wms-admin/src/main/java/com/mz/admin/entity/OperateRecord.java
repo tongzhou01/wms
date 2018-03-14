@@ -5,11 +5,11 @@ import com.mz.common.entity.IEntity;
 import java.util.Date;
 
 public class OperateRecord implements IEntity {
-    private Integer id;
+    private Long id;
 
     private Long cargoId;
 
-    private String operator;
+    private Long operator;
 
     private Date outboundTime;
 
@@ -19,11 +19,11 @@ public class OperateRecord implements IEntity {
 
     private Byte isDeleted;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,12 +35,12 @@ public class OperateRecord implements IEntity {
         this.cargoId = cargoId;
     }
 
-    public String getOperator() {
+    public Long getOperator() {
         return operator;
     }
 
-    public void setOperator(String operator) {
-        this.operator = operator == null ? null : operator.trim();
+    public void setOperator(Long operator) {
+        this.operator = operator;
     }
 
     public Date getOutboundTime() {

@@ -85,7 +85,7 @@ public class ExpressCompanyController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public R getById(@RequestParam Integer id) {
+    public R getById(@RequestParam Long id) {
         ExpressCompany expressCompany = expressCompanyService.selectByPrimaryKey(id);
         return CommonUtil.msg(expressCompany);
     }

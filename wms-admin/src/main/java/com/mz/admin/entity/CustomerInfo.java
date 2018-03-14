@@ -1,15 +1,9 @@
 package com.mz.admin.entity;
 
-import com.mz.common.entity.IEntity;
-
+import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * @author tongzhou
- * @description 顾客信息
- * @date 2018/3/8 11:31
- */
-public class CustomerInfo implements IEntity {
+public class CustomerInfo {
     private Long id;
 
     private String customerNo;
@@ -23,6 +17,10 @@ public class CustomerInfo implements IEntity {
     private String customerPostcode;
 
     private String customerAddress;
+
+    private BigDecimal balance;
+
+    private BigDecimal totalAmount;
 
     private Date gmtCreate;
 
@@ -84,6 +82,22 @@ public class CustomerInfo implements IEntity {
 
     public void setCustomerAddress(String customerAddress) {
         this.customerAddress = customerAddress == null ? null : customerAddress.trim();
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public Date getGmtCreate() {

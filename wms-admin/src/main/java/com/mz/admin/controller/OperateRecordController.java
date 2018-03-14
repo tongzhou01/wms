@@ -77,7 +77,7 @@ public class OperateRecordController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public R getById(@RequestParam Integer id) {
+    public R getById(@RequestParam Long id) {
         OperateRecord operateRecord = operateRecordService.selectByPrimaryKey(id);
         return CommonUtil.msg(operateRecord);
     }

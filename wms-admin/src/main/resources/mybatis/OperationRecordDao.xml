@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mz.admin.dao.OperateRecordDao">
   <resultMap id="BaseResultMap" type="com.mz.admin.entity.OperateRecord">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="cargo_id" jdbcType="BIGINT" property="cargoId" />
-    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operator" jdbcType="BIGINT" property="operator" />
     <result column="outbound_time" jdbcType="TIMESTAMP" property="outboundTime" />
     <result column="type" jdbcType="TIMESTAMP" property="type" />
     <result column="outbound_type_id" jdbcType="BIGINT" property="outboundTypeId" />
@@ -17,17 +17,17 @@
     select 
     <include refid="Base_Column_List" />
     from operation_record
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from operation_record
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.mz.admin.entity.OperateRecord">
     insert into operation_record (id, cargo_id, operator, 
       outbound_time, type, outbound_type_id, 
       is_deleted)
-    values (#{id,jdbcType=INTEGER}, #{cargoId,jdbcType=BIGINT}, #{operator,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{cargoId,jdbcType=BIGINT}, #{operator,jdbcType=BIGINT},
       #{outboundTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TIMESTAMP}, #{outboundTypeId,jdbcType=BIGINT}, 
       #{isDeleted,jdbcType=TINYINT})
   </insert>
@@ -58,13 +58,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="cargoId != null">
         #{cargoId,jdbcType=BIGINT},
       </if>
       <if test="operator != null">
-        #{operator,jdbcType=VARCHAR},
+        #{operator,jdbcType=BIGINT},
       </if>
       <if test="outboundTime != null">
         #{outboundTime,jdbcType=TIMESTAMP},
@@ -87,7 +87,7 @@
         cargo_id = #{cargoId,jdbcType=BIGINT},
       </if>
       <if test="operator != null">
-        operator = #{operator,jdbcType=VARCHAR},
+        operator = #{operator,jdbcType=BIGINT},
       </if>
       <if test="outboundTime != null">
         outbound_time = #{outboundTime,jdbcType=TIMESTAMP},
@@ -102,16 +102,16 @@
         is_deleted = #{isDeleted,jdbcType=TINYINT},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OperateRecord">
     update operation_record
     set cargo_id = #{cargoId,jdbcType=BIGINT},
-      operator = #{operator,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=BIGINT},
       outbound_time = #{outboundTime,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=TIMESTAMP},
       outbound_type_id = #{outboundTypeId,jdbcType=BIGINT},
       is_deleted = #{isDeleted,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

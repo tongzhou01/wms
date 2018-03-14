@@ -41,6 +41,7 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
     public R login(String username, String password, String imageCode, String uuid) {
         if (imageCode.toUpperCase().equals(redisCache.getValue(uuid))) {
             Example example = Example.create(UserInfo.class);
+            example.setColumns(new String[]{"id", "user_name", "real_name", "sex"});
             example.equal("is_deleted", 0);
             example.setTableName("user_info");
             example.equal("user_name", username);
@@ -49,7 +50,7 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
             String token = WebTokenUtil.createJavaWebToken(userInfoMap);
             return CommonUtil.msg(userInfoMap).put("token", token);
         } else {
-            return R.error(500, "验证码错误");
+            return R.error(500, "用户名或密码错误");
         }
     }
 

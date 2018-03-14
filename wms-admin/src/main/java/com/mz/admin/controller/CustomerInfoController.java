@@ -84,7 +84,7 @@ public class CustomerInfoController {
      * @return
      */
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public R getById(@RequestParam Integer id) {
+    public R getById(@RequestParam Long id) {
         CustomerInfo customerInfo = customerInfoService.selectByPrimaryKey(id);
         return CommonUtil.msg(customerInfo);
     }
