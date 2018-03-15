@@ -19,7 +19,7 @@ import java.util.Map;
  * @date 2018-03-13 10:16
  **/
 @RestController
-@RequestMapping("/api/cargo/ops_record/")
+@RequestMapping("/api/cargo/ops/")
 public class OperateRecordController {
 
     @Autowired
@@ -30,32 +30,32 @@ public class OperateRecordController {
     /**
      * 分页查询
      *
-     * @param page
-     * @param rows
+     * @param currentPage
+     * @param pageSize
      * @param startDate
      * @param endDate
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "page", required = false) Integer page,
-                  @RequestParam(value = "rows", required = false) Integer rows,
+                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
+                  @RequestParam(value = "pageSize", required = false) Integer pageSize,
                   @RequestParam(value = "startDate", required = false) String startDate,
                   @RequestParam(value = "endDate", required = false) String endDate
     ) {
         Example example = Example.create(OperateRecord.class);
         example.equal("is_deleted", 0);
-        if (page != null && rows != null) {
-            example.setPage(page);
-            example.setPage(rows);
+        if (currentPage != null && pageSize != null) {
+            example.setPage(currentPage);
+            example.setPage(pageSize);
         }
         if (startDate != null && endDate != null) {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
-        int count = baseService.count(example);
+        int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
-        return CommonUtil.msg(list);
+        return CommonUtil.msg(list).put("total", total);
     }
 
     /**

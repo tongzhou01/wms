@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,8 @@ public class CustomerInfoController {
     /**
      * 分页查询
      *
-     * @param page
-     * @param rows
+     * @param currentPage
+     * @param pageSize
      * @param startDate
      * @param endDate
      * @param customerName
@@ -40,8 +41,8 @@ public class CustomerInfoController {
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "page", required = false) Integer page,
-                  @RequestParam(value = "rows", required = false) Integer rows,
+                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
+                  @RequestParam(value = "pageSize", required = false) Integer pageSize,
                   @RequestParam(value = "startDate", required = false) String startDate,
                   @RequestParam(value = "endDate", required = false) String endDate,
                   @RequestParam(value = "customerName", required = false) String customerName,
@@ -53,16 +54,17 @@ public class CustomerInfoController {
             example.like("customer_name", "%" + customerName + "%");
         if (customerNo != null)
             example.like("customer_no", "%" + customerNo + "%");
-        if (page != null && rows != null) {
-            example.setPage(page);
-            example.setPage(rows);
+        if (currentPage != null && pageSize != null) {
+            example.setPage(currentPage);
+            example.setRows(pageSize);
         }
         if (startDate != null && endDate != null) {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
-        return CommonUtil.msg(list);
+        return CommonUtil.msg(list).put("total", total);
     }
 
     /**
@@ -73,6 +75,9 @@ public class CustomerInfoController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody CustomerInfo customerInfo) {
+        Integer maxId = customerInfoService.selectMaxId();
+        customerInfo.setCustomerNo("MZA" + (maxId == null ? 0 : maxId));
+        customerInfo.setGmtCreate(new Date());
         int i = customerInfoService.insertSelective(customerInfo);
         return CommonUtil.msg(i);
     }

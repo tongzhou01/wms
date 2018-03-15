@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerInfoDao extends IDao<CustomerInfo> {
+    Integer selectMaxId();
 }

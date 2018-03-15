@@ -30,8 +30,8 @@ public class CargoChargeController {
     /**
      * 分页查询
      *
-     * @param page
-     * @param rows
+     * @param currentPage
+     * @param pageSize
      * @param startDate
      * @param endDate
      * @param orderNo
@@ -40,8 +40,8 @@ public class CargoChargeController {
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "page", required = false) Integer page,
-                  @RequestParam(value = "rows", required = false) Integer rows,
+                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
+                  @RequestParam(value = "pageSize", required = false) Integer pageSize,
                   @RequestParam(value = "startDate", required = false) String startDate,
                   @RequestParam(value = "endDate", required = false) String endDate,
                   @RequestParam(value = "orderNo", required = false) Integer orderNo,
@@ -53,17 +53,17 @@ public class CargoChargeController {
             example.like("order_no", "%" + orderNo + "%");
         if (customerNo != null)
             example.like("customer_no", "%" + customerNo + "%");
-        if (page != null && rows != null) {
-            example.setPage(page);
-            example.setPage(rows);
+        if (currentPage != null && pageSize != null) {
+            example.setPage(currentPage);
+            example.setRows(pageSize);
         }
         if (startDate != null && endDate != null) {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
-        int count = baseService.count(example);
+        int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
-        return CommonUtil.msg(list);
+        return CommonUtil.msg(list).put("total", total);
     }
 
     /**
@@ -117,6 +117,4 @@ public class CargoChargeController {
         return CommonUtil.msg(ids, i);
     }
 
-    public static void main(String[] args) {
-    }
 }

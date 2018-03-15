@@ -174,5 +174,7 @@
       is_deleted = #{isDeleted,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    SELECT max(id) c.id FROM wms.customer_info c WHERE c.is_deleted = 0
+  </select>
 </mapper>

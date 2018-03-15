@@ -55,7 +55,7 @@
 
     <!-- 自动扫描dao接口，生成MapperFactoryBean -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.mz.**.dao"/>
+        <property name="basePackage" value="com.mz.admin.dao, com.mz.common.dao"/>
         <!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/> -->
     </bean>
 

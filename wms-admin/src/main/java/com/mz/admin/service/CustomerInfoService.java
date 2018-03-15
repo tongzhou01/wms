@@ -5,4 +5,5 @@ import com.mz.common.service.IService;
 
 public interface CustomerInfoService extends IService<CustomerInfo> {
 
+    Integer selectMaxId();
 }

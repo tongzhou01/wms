@@ -18,4 +18,9 @@ public class CustomerInfoServiceImpl extends BaseService<CustomerInfo> implement
     public IDao<CustomerInfo> getDao() {
         return customerInfoDao;
     }
+
+    @Override
+    public Integer selectMaxId() {
+        return customerInfoDao.selectMaxId();
+    }
 }
