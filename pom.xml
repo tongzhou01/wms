@@ -9,9 +9,9 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>wms-common</module>
-        <module>wms-admin</module>
         <module>wms-web</module>
+        <module>wms-admin</module>
+        <module>wms-common</module>
     </modules>
 
     <properties>
@@ -234,6 +234,20 @@
     <build>
         <finalName>wms</finalName>
         <plugins>
+                <!-- jar插件 -->
+                <!--<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.3.1</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>-->
             <!-- define the project compile level -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -245,5 +259,16 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!--配置Maven 对resource文件 过滤 -->
+        <!--<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>-->
     </build>
 </project>

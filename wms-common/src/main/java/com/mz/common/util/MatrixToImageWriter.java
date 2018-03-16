@@ -59,7 +59,7 @@ public class MatrixToImageWriter {
         }
     }
 
-    public static void createPayQr(String qrCode, int width, int height, BarcodeFormat barFormat, String format, HttpServletResponse response) {
+    public static void createQr(String qrCode, int width, int height, BarcodeFormat barFormat, String format, HttpServletResponse response) {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         hints.put(EncodeHintType.MARGIN,1);
