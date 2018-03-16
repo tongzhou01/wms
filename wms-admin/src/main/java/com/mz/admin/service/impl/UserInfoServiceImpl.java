@@ -28,7 +28,7 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
     @Autowired
     UserInfoDao userInfoDao;
     @Autowired
-    BaseDao<Map> baseDao;
+    BaseDao baseDao;
     @Autowired
     RedisCache redisCache;
 
@@ -46,11 +46,14 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
             example.setTableName("user_info");
             example.equal("user_name", username);
             example.equal("password", MD5Util.MD5Encode(password));
-            Map userInfoMap = baseDao.load(example);
+            Map<String, Object> userInfoMap = baseDao.load(example);
+            if (userInfoMap == null) {
+                return R.error("用户名或密码错误");
+            }
             String token = WebTokenUtil.createJavaWebToken(userInfoMap);
             return CommonUtil.msg(userInfoMap).put("token", token);
         } else {
-            return R.error(500, "用户名或密码错误");
+            return R.error(500, "验证码错误");
         }
     }
 
