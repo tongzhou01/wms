@@ -20,8 +20,7 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <array>
-                <value>classpath*:jdbc.properties</value>
-                <value>classpath*:redis.properties</value>
+                <value>classpath*:*.properties</value>
             </array>
         </property>
     </bean>
@@ -65,7 +64,7 @@
         <!-- 读取mybatis配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:mybatis/*.xml"/>
+        <property name="mapperLocations" value="classpath*:mybatis/*.xml"/>
     </bean>
     <!-- Redis 配置 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
