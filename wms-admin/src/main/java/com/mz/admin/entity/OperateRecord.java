@@ -11,13 +11,23 @@ public class OperateRecord implements IEntity {
 
     private Long operator;
 
-    private Date outboundTime;
+    private Date scanTime;
 
     private Date type;
 
     private Long outboundTypeId;
 
     private Byte isDeleted;
+
+    private String shelfNo;
+
+    public String getShelfNo() {
+        return shelfNo;
+    }
+
+    public void setShelfNo(String shelfNo) {
+        this.shelfNo = shelfNo;
+    }
 
     public Long getId() {
         return id;
@@ -43,12 +53,12 @@ public class OperateRecord implements IEntity {
         this.operator = operator;
     }
 
-    public Date getOutboundTime() {
-        return outboundTime;
+    public Date getScanTime() {
+        return scanTime;
     }
 
-    public void setOutboundTime(Date outboundTime) {
-        this.outboundTime = outboundTime;
+    public void setScanTime(Date scanTime) {
+        this.scanTime = scanTime;
     }
 
     public Date getType() {

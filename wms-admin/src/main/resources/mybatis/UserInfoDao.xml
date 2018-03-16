@@ -1,223 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mz.admin.dao.UserInfoDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.entity.UserInfo">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="real_name" jdbcType="VARCHAR" property="realName" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="sex" jdbcType="TINYINT" property="sex" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
-    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
-    <result column="department" jdbcType="VARCHAR" property="department" />
-    <result column="position" jdbcType="VARCHAR" property="position" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
-    <result column="emall" jdbcType="VARCHAR" property="emall" />
-    <result column="remake" jdbcType="VARCHAR" property="remake" />
-    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, role_id, user_name, real_name, password, sex, gmt_create, create_user_id, birthday, 
-    department, position, mobile, telephone, emall, remake, is_deleted
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user_info
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user_info
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.mz.admin.entity.UserInfo">
-    insert into user_info (id, role_id, user_name, 
-      real_name, password, sex, 
-      gmt_create, create_user_id, birthday, 
-      department, position, mobile, 
-      telephone, emall, remake, 
-      is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
-      #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{department,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{telephone,jdbcType=VARCHAR}, #{emall,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR}, 
-      #{isDeleted,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.entity.UserInfo">
-    insert into user_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="roleId != null">
-        role_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="realName != null">
-        real_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="createUserId != null">
-        create_user_id,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="department != null">
-        department,
-      </if>
-      <if test="position != null">
-        position,
-      </if>
-      <if test="mobile != null">
-        mobile,
-      </if>
-      <if test="telephone != null">
-        telephone,
-      </if>
-      <if test="emall != null">
-        emall,
-      </if>
-      <if test="remake != null">
-        remake,
-      </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="roleId != null">
-        #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null">
-        #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=TINYINT},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null">
-        #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="department != null">
-        #{department,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null">
-        #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null">
-        #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="emall != null">
-        #{emall,jdbcType=VARCHAR},
-      </if>
-      <if test="remake != null">
-        #{remake,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.UserInfo">
-    update user_info
-    <set>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="userName != null">
+    <resultMap id="BaseResultMap" type="com.mz.admin.entity.UserInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
+        <result column="department" jdbcType="VARCHAR" property="department"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="emall" jdbcType="VARCHAR" property="emall"/>
+        <result column="remake" jdbcType="VARCHAR" property="remake"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, role_id, user_name, real_name, password, sex, gmt_create, create_user_id, birthday,
+        department, position, mobile, telephone, emall, remake, is_deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.mz.admin.entity.UserInfo">
+        insert into user_info (id, role_id, user_name,
+        real_name, password, sex,
+        gmt_create, create_user_id, birthday,
+        department, position, mobile,
+        telephone, emall, remake,
+        is_deleted)
+        values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+        #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT},
+        #{gmtCreate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{birthday,jdbcType=TIMESTAMP},
+        #{department,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+        #{telephone,jdbcType=VARCHAR}, #{emall,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR},
+        #{isDeleted,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mz.admin.entity.UserInfo">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="position != null">
+                position,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="telephone != null">
+                telephone,
+            </if>
+            <if test="emall != null">
+                emall,
+            </if>
+            <if test="remake != null">
+                remake,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="department != null">
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="emall != null">
+                #{emall,jdbcType=VARCHAR},
+            </if>
+            <if test="remake != null">
+                #{remake,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.UserInfo">
+        update user_info
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="department != null">
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                position = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="emall != null">
+                emall = #{emall,jdbcType=VARCHAR},
+            </if>
+            <if test="remake != null">
+                remake = #{remake,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.UserInfo">
+        update user_info
+        set role_id = #{roleId,jdbcType=BIGINT},
         user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="realName != null">
         real_name = #{realName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
         sex = #{sex,jdbcType=TINYINT},
-      </if>
-      <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=BIGINT},
-      </if>
-      <if test="birthday != null">
         birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-      <if test="department != null">
         department = #{department,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
         position = #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null">
         mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null">
         telephone = #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="emall != null">
         emall = #{emall,jdbcType=VARCHAR},
-      </if>
-      <if test="remake != null">
         remake = #{remake,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.UserInfo">
-    update user_info
-    set role_id = #{roleId,jdbcType=BIGINT},
-      user_name = #{userName,jdbcType=VARCHAR},
-      real_name = #{realName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=TINYINT},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      department = #{department,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      emall = #{emall,jdbcType=VARCHAR},
-      remake = #{remake,jdbcType=VARCHAR},
-      is_deleted = #{isDeleted,jdbcType=TINYINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        is_deleted = #{isDeleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

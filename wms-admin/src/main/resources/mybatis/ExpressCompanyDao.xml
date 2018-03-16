@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mz.admin.dao.ExpressCompanyDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.entity.ExpressCompany">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
-    <result column="company_code" jdbcType="VARCHAR" property="companyCode" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.mz.admin.entity.ExpressCompany">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_code" jdbcType="VARCHAR" property="companyCode"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, company_name, company_code, remark, is_deleted, type
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from express_company
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from express_company
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.mz.admin.entity.ExpressCompany">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from express_company
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from express_company
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.mz.admin.entity.ExpressCompany">
     insert into express_company (id, company_name, company_code, 
       remark, is_deleted, type
       )
@@ -30,71 +30,71 @@
       #{remark,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.entity.ExpressCompany">
-    insert into express_company
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="companyName != null">
-        company_name,
-      </if>
-      <if test="companyCode != null">
-        company_code,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="companyName != null">
-        #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="companyCode != null">
-        #{companyCode,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=TINYINT},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.ExpressCompany">
-    update express_company
-    <set>
-      <if test="companyName != null">
-        company_name = #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="companyCode != null">
-        company_code = #{companyCode,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=TINYINT},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.ExpressCompany">
+    <insert id="insertSelective" parameterType="com.mz.admin.entity.ExpressCompany">
+        insert into express_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="companyCode != null">
+                company_code,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCode != null">
+                #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.ExpressCompany">
+        update express_company
+        <set>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCode != null">
+                company_code = #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.ExpressCompany">
     update express_company
     set company_name = #{companyName,jdbcType=VARCHAR},
       company_code = #{companyCode,jdbcType=VARCHAR},

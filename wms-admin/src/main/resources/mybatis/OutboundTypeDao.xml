@@ -1,93 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mz.admin.dao.OutboundTypeDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.entity.OutboundType">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="outbound_type" jdbcType="VARCHAR" property="outboundType" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
-    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, outbound_type, gmt_create, gmt_modify, is_deleted
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from outbound_type
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from outbound_type
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.mz.admin.entity.OutboundType">
-    insert into outbound_type (id, outbound_type, gmt_create, 
-      gmt_modify, is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{outboundType,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModify,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.entity.OutboundType">
-    insert into outbound_type
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="outboundType != null">
-        outbound_type,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify,
-      </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="outboundType != null">
-        #{outboundType,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.OutboundType">
-    update outbound_type
-    <set>
-      <if test="outboundType != null">
-        outbound_type = #{outboundType,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
+    <resultMap id="BaseResultMap" type="com.mz.admin.entity.OutboundType">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="outbound_type" jdbcType="VARCHAR" property="outboundType"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, outbound_type, gmt_create, gmt_modify, is_deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from outbound_type
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from outbound_type
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.mz.admin.entity.OutboundType">
+        insert into outbound_type (id, outbound_type, gmt_create,
+        gmt_modify, is_deleted)
+        values (#{id,jdbcType=BIGINT}, #{outboundType,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mz.admin.entity.OutboundType">
+        insert into outbound_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="outboundType != null">
+                outbound_type,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModify != null">
+                gmt_modify,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="outboundType != null">
+                #{outboundType,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.OutboundType">
+        update outbound_type
+        <set>
+            <if test="outboundType != null">
+                outbound_type = #{outboundType,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OutboundType">
+        update outbound_type
+        set outbound_type = #{outboundType,jdbcType=VARCHAR},
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OutboundType">
-    update outbound_type
-    set outbound_type = #{outboundType,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      is_deleted = #{isDeleted,jdbcType=TINYINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        is_deleted = #{isDeleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

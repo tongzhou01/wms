@@ -1,283 +1,283 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mz.admin.dao.CargoInfoDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.entity.CargoInfo">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="cn_no" jdbcType="VARCHAR" property="cnNo" />
-    <result column="intl_no" jdbcType="VARCHAR" property="intlNo" />
-    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
-    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
-    <result column="customer_no" jdbcType="VARCHAR" property="customerNo" />
-    <result column="express_company_code" jdbcType="VARCHAR" property="expressCompanyCode" />
-    <result column="express_company" jdbcType="VARCHAR" property="expressCompany" />
-    <result column="shelf_no" jdbcType="VARCHAR" property="shelfNo" />
-    <result column="destination" jdbcType="VARCHAR" property="destination" />
-    <result column="weight" jdbcType="DECIMAL" property="weight" />
-    <result column="length" jdbcType="DECIMAL" property="length" />
-    <result column="wide" jdbcType="DECIMAL" property="wide" />
-    <result column="height" jdbcType="DECIMAL" property="height" />
-    <result column="volume_weight" jdbcType="DECIMAL" property="volumeWeight" />
-    <result column="cargo_charge" jdbcType="DECIMAL" property="cargoCharge" />
-    <result column="express_charge" jdbcType="DECIMAL" property="expressCharge" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, cn_no, intl_no, order_no, customer_name, customer_no, express_company_code, express_company, 
-    shelf_no, destination, weight, length, wide, height, volume_weight, cargo_charge, 
-    express_charge, gmt_create, gmt_modify, status, is_deleted
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cargo_info
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from cargo_info
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.mz.admin.entity.CargoInfo">
-    insert into cargo_info (id, cn_no, intl_no, 
-      order_no, customer_name, customer_no, 
-      express_company_code, express_company, shelf_no, 
-      destination, weight, length, 
-      wide, height, volume_weight, 
-      cargo_charge, express_charge, gmt_create, 
-      gmt_modify, status, is_deleted
-      )
-    values (#{id,jdbcType=BIGINT}, #{cnNo,jdbcType=VARCHAR}, #{intlNo,jdbcType=VARCHAR}, 
-      #{orderNo,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR}, 
-      #{expressCompanyCode,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, #{shelfNo,jdbcType=VARCHAR}, 
-      #{destination,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{length,jdbcType=DECIMAL}, 
-      #{wide,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{volumeWeight,jdbcType=DECIMAL}, 
-      #{cargoCharge,jdbcType=DECIMAL}, #{expressCharge,jdbcType=DECIMAL}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModify,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.entity.CargoInfo">
-    insert into cargo_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="cnNo != null">
-        cn_no,
-      </if>
-      <if test="intlNo != null">
-        intl_no,
-      </if>
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="customerName != null">
-        customer_name,
-      </if>
-      <if test="customerNo != null">
-        customer_no,
-      </if>
-      <if test="expressCompanyCode != null">
-        express_company_code,
-      </if>
-      <if test="expressCompany != null">
-        express_company,
-      </if>
-      <if test="shelfNo != null">
-        shelf_no,
-      </if>
-      <if test="destination != null">
-        destination,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-      <if test="length != null">
-        length,
-      </if>
-      <if test="wide != null">
-        wide,
-      </if>
-      <if test="height != null">
-        height,
-      </if>
-      <if test="volumeWeight != null">
-        volume_weight,
-      </if>
-      <if test="cargoCharge != null">
-        cargo_charge,
-      </if>
-      <if test="expressCharge != null">
-        express_charge,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="cnNo != null">
-        #{cnNo,jdbcType=VARCHAR},
-      </if>
-      <if test="intlNo != null">
-        #{intlNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null">
-        #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerNo != null">
-        #{customerNo,jdbcType=VARCHAR},
-      </if>
-      <if test="expressCompanyCode != null">
-        #{expressCompanyCode,jdbcType=VARCHAR},
-      </if>
-      <if test="expressCompany != null">
-        #{expressCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="shelfNo != null">
-        #{shelfNo,jdbcType=VARCHAR},
-      </if>
-      <if test="destination != null">
-        #{destination,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
-        #{weight,jdbcType=DECIMAL},
-      </if>
-      <if test="length != null">
-        #{length,jdbcType=DECIMAL},
-      </if>
-      <if test="wide != null">
-        #{wide,jdbcType=DECIMAL},
-      </if>
-      <if test="height != null">
-        #{height,jdbcType=DECIMAL},
-      </if>
-      <if test="volumeWeight != null">
-        #{volumeWeight,jdbcType=DECIMAL},
-      </if>
-      <if test="cargoCharge != null">
-        #{cargoCharge,jdbcType=DECIMAL},
-      </if>
-      <if test="expressCharge != null">
-        #{expressCharge,jdbcType=DECIMAL},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.CargoInfo">
-    update cargo_info
-    <set>
-      <if test="cnNo != null">
-        cn_no = #{cnNo,jdbcType=VARCHAR},
-      </if>
-      <if test="intlNo != null">
+    <resultMap id="BaseResultMap" type="com.mz.admin.entity.CargoInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="cn_no" jdbcType="VARCHAR" property="cnNo"/>
+        <result column="intl_no" jdbcType="VARCHAR" property="intlNo"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customer_no" jdbcType="VARCHAR" property="customerNo"/>
+        <result column="express_company_code" jdbcType="VARCHAR" property="expressCompanyCode"/>
+        <result column="express_company" jdbcType="VARCHAR" property="expressCompany"/>
+        <result column="shelf_no" jdbcType="VARCHAR" property="shelfNo"/>
+        <result column="destination" jdbcType="VARCHAR" property="destination"/>
+        <result column="weight" jdbcType="DECIMAL" property="weight"/>
+        <result column="length" jdbcType="DECIMAL" property="length"/>
+        <result column="wide" jdbcType="DECIMAL" property="wide"/>
+        <result column="height" jdbcType="DECIMAL" property="height"/>
+        <result column="volume_weight" jdbcType="DECIMAL" property="volumeWeight"/>
+        <result column="cargo_charge" jdbcType="DECIMAL" property="cargoCharge"/>
+        <result column="express_charge" jdbcType="DECIMAL" property="expressCharge"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, cn_no, intl_no, order_no, customer_name, customer_no, express_company_code, express_company,
+        shelf_no, destination, weight, length, wide, height, volume_weight, cargo_charge,
+        express_charge, gmt_create, gmt_modify, status, is_deleted
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cargo_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from cargo_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.mz.admin.entity.CargoInfo">
+        insert into cargo_info (id, cn_no, intl_no,
+        order_no, customer_name, customer_no,
+        express_company_code, express_company, shelf_no,
+        destination, weight, length,
+        wide, height, volume_weight,
+        cargo_charge, express_charge, gmt_create,
+        gmt_modify, status, is_deleted
+        )
+        values (#{id,jdbcType=BIGINT}, #{cnNo,jdbcType=VARCHAR}, #{intlNo,jdbcType=VARCHAR},
+        #{orderNo,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR},
+        #{expressCompanyCode,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, #{shelfNo,jdbcType=VARCHAR},
+        #{destination,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{length,jdbcType=DECIMAL},
+        #{wide,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{volumeWeight,jdbcType=DECIMAL},
+        #{cargoCharge,jdbcType=DECIMAL}, #{expressCharge,jdbcType=DECIMAL}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.mz.admin.entity.CargoInfo">
+        insert into cargo_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cnNo != null">
+                cn_no,
+            </if>
+            <if test="intlNo != null">
+                intl_no,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="customerNo != null">
+                customer_no,
+            </if>
+            <if test="expressCompanyCode != null">
+                express_company_code,
+            </if>
+            <if test="expressCompany != null">
+                express_company,
+            </if>
+            <if test="shelfNo != null">
+                shelf_no,
+            </if>
+            <if test="destination != null">
+                destination,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="length != null">
+                length,
+            </if>
+            <if test="wide != null">
+                wide,
+            </if>
+            <if test="height != null">
+                height,
+            </if>
+            <if test="volumeWeight != null">
+                volume_weight,
+            </if>
+            <if test="cargoCharge != null">
+                cargo_charge,
+            </if>
+            <if test="expressCharge != null">
+                express_charge,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModify != null">
+                gmt_modify,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="cnNo != null">
+                #{cnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="intlNo != null">
+                #{intlNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNo != null">
+                #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompanyCode != null">
+                #{expressCompanyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompany != null">
+                #{expressCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="shelfNo != null">
+                #{shelfNo,jdbcType=VARCHAR},
+            </if>
+            <if test="destination != null">
+                #{destination,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="length != null">
+                #{length,jdbcType=DECIMAL},
+            </if>
+            <if test="wide != null">
+                #{wide,jdbcType=DECIMAL},
+            </if>
+            <if test="height != null">
+                #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="volumeWeight != null">
+                #{volumeWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="cargoCharge != null">
+                #{cargoCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="expressCharge != null">
+                #{expressCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.CargoInfo">
+        update cargo_info
+        <set>
+            <if test="cnNo != null">
+                cn_no = #{cnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="intlNo != null">
+                intl_no = #{intlNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNo != null">
+                customer_no = #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompanyCode != null">
+                express_company_code = #{expressCompanyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompany != null">
+                express_company = #{expressCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="shelfNo != null">
+                shelf_no = #{shelfNo,jdbcType=VARCHAR},
+            </if>
+            <if test="destination != null">
+                destination = #{destination,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null">
+                weight = #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="length != null">
+                length = #{length,jdbcType=DECIMAL},
+            </if>
+            <if test="wide != null">
+                wide = #{wide,jdbcType=DECIMAL},
+            </if>
+            <if test="height != null">
+                height = #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="volumeWeight != null">
+                volume_weight = #{volumeWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="cargoCharge != null">
+                cargo_charge = #{cargoCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="expressCharge != null">
+                express_charge = #{expressCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModify != null">
+                gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.CargoInfo">
+        update cargo_info
+        set cn_no = #{cnNo,jdbcType=VARCHAR},
         intl_no = #{intlNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="customerName != null">
         customer_name = #{customerName,jdbcType=VARCHAR},
-      </if>
-      <if test="customerNo != null">
         customer_no = #{customerNo,jdbcType=VARCHAR},
-      </if>
-      <if test="expressCompanyCode != null">
         express_company_code = #{expressCompanyCode,jdbcType=VARCHAR},
-      </if>
-      <if test="expressCompany != null">
         express_company = #{expressCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="shelfNo != null">
         shelf_no = #{shelfNo,jdbcType=VARCHAR},
-      </if>
-      <if test="destination != null">
         destination = #{destination,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
         weight = #{weight,jdbcType=DECIMAL},
-      </if>
-      <if test="length != null">
         length = #{length,jdbcType=DECIMAL},
-      </if>
-      <if test="wide != null">
         wide = #{wide,jdbcType=DECIMAL},
-      </if>
-      <if test="height != null">
         height = #{height,jdbcType=DECIMAL},
-      </if>
-      <if test="volumeWeight != null">
         volume_weight = #{volumeWeight,jdbcType=DECIMAL},
-      </if>
-      <if test="cargoCharge != null">
         cargo_charge = #{cargoCharge,jdbcType=DECIMAL},
-      </if>
-      <if test="expressCharge != null">
         express_charge = #{expressCharge,jdbcType=DECIMAL},
-      </if>
-      <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null">
         status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.CargoInfo">
-    update cargo_info
-    set cn_no = #{cnNo,jdbcType=VARCHAR},
-      intl_no = #{intlNo,jdbcType=VARCHAR},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      customer_no = #{customerNo,jdbcType=VARCHAR},
-      express_company_code = #{expressCompanyCode,jdbcType=VARCHAR},
-      express_company = #{expressCompany,jdbcType=VARCHAR},
-      shelf_no = #{shelfNo,jdbcType=VARCHAR},
-      destination = #{destination,jdbcType=VARCHAR},
-      weight = #{weight,jdbcType=DECIMAL},
-      length = #{length,jdbcType=DECIMAL},
-      wide = #{wide,jdbcType=DECIMAL},
-      height = #{height,jdbcType=DECIMAL},
-      volume_weight = #{volumeWeight,jdbcType=DECIMAL},
-      cargo_charge = #{cargoCharge,jdbcType=DECIMAL},
-      express_charge = #{expressCharge,jdbcType=DECIMAL},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT},
-      is_deleted = #{isDeleted,jdbcType=TINYINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        is_deleted = #{isDeleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
