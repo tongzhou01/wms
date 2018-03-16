@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,7 @@ public class OperateRecordController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        example.setOrderBy("gmt_create desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list).put("total", total);
@@ -66,6 +68,7 @@ public class OperateRecordController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody OperateRecord operateRecord) {
+        operateRecord.setScanTime(new Date());
         int i = operateRecordService.insertSelective(operateRecord);
         return CommonUtil.msg(i);
     }

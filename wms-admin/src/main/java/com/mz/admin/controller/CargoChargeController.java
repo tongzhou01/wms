@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +35,6 @@ public class CargoChargeController {
      * @param pageSize
      * @param startDate
      * @param endDate
-     * @param orderNo
-     * @param customerNo
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
@@ -43,16 +42,10 @@ public class CargoChargeController {
                   @RequestParam(value = "currentPage", required = false) Integer currentPage,
                   @RequestParam(value = "pageSize", required = false) Integer pageSize,
                   @RequestParam(value = "startDate", required = false) String startDate,
-                  @RequestParam(value = "endDate", required = false) String endDate,
-                  @RequestParam(value = "orderNo", required = false) Integer orderNo,
-                  @RequestParam(value = "customerNo", required = false) Integer customerNo
+                  @RequestParam(value = "endDate", required = false) String endDate
     ) {
         Example example = Example.create(CargoCharge.class);
         example.equal("is_deleted", 0);
-        if (orderNo != null)
-            example.like("order_no", "%" + orderNo + "%");
-        if (customerNo != null)
-            example.like("customer_no", "%" + customerNo + "%");
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
             example.setRows(pageSize);
@@ -61,6 +54,7 @@ public class CargoChargeController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        example.setOrderBy("gmt_create desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list).put("total", total);
@@ -74,6 +68,7 @@ public class CargoChargeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody CargoCharge cargoCharge) {
+        cargoCharge.setGmtCreate(new Date());
         int i = cargoChargeService.insertSelective(cargoCharge);
         return CommonUtil.msg(i);
     }

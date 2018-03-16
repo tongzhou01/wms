@@ -53,6 +53,7 @@ public class OutboundTypeController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        example.setOrderBy("gmt_create desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list).put("total", total);

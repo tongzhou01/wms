@@ -46,7 +46,7 @@ public class CustomerInfoController {
                   @RequestParam(value = "startDate", required = false) String startDate,
                   @RequestParam(value = "endDate", required = false) String endDate,
                   @RequestParam(value = "customerName", required = false) String customerName,
-                  @RequestParam(value = "customerNo", required = false) Integer customerNo
+                  @RequestParam(value = "customerNo", required = false) String customerNo
     ) {
         Example example = Example.create(CustomerInfo.class);
         example.equal("is_deleted", 0);
@@ -62,6 +62,7 @@ public class CustomerInfoController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        example.setOrderBy("gmt_create desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list).put("total", total);
@@ -76,7 +77,7 @@ public class CustomerInfoController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody CustomerInfo customerInfo) {
         Integer maxId = customerInfoService.selectMaxId();
-        customerInfo.setCustomerNo("MZA" + (maxId == null ? 0 : maxId));
+        customerInfo.setCustomerNo("MZA" + 10000 + (maxId == null ? 0 : maxId));
         customerInfo.setGmtCreate(new Date());
         int i = customerInfoService.insertSelective(customerInfo);
         return CommonUtil.msg(i);

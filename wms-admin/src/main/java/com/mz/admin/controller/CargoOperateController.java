@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,9 @@ public class CargoOperateController {
                   @RequestParam(value = "pageSize", required = false) Integer pageSize,
                   @RequestParam(value = "startDate", required = false) String startDate,
                   @RequestParam(value = "endDate", required = false) String endDate,
-                  @RequestParam(value = "orderNo", required = false) Integer orderNo,
-                  @RequestParam(value = "customerNo", required = false) Integer customerNo
+                  @RequestParam(value = "orderNo", required = false) String orderNo,
+                  @RequestParam(value = "customerNo", required = false) String customerNo,
+                  @RequestParam(value = "type", required = false) Integer type
     ) {
         Example example = Example.create(CargoInfo.class);
         example.equal("is_deleted", 0);
@@ -61,6 +63,7 @@ public class CargoOperateController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        example.setOrderBy("gmt_create desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list).put("total", total);
@@ -74,6 +77,7 @@ public class CargoOperateController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody CargoInfo cargoInfo) {
+        cargoInfo.setGmtCreate(new Date());
         int i = cargoInfoService.insertSelective(cargoInfo);
         return CommonUtil.msg(i);
     }
