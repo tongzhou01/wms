@@ -33,6 +33,11 @@ public interface IService<T> {
     int count(Example example);
 
     /**
+     * 计数
+     */
+    int count(QueryParam queryParam);
+
+    /**
      * 直接执行sql
      */
     List<Map<String, Object>> executeSql(String sql);
@@ -106,5 +111,5 @@ public interface IService<T> {
      * @param queryParam
      * @return
      */
-    List<T> index(QueryParam queryParam);
+    List<Map> index(QueryParam queryParam);
 }

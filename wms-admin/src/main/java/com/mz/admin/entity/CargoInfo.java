@@ -21,6 +21,8 @@ public class CargoInfo implements IEntity {
 
     private String customerName;
 
+    private String customerMobile;
+
     private String customerNo;
 
     private String expressCompanyCode;
@@ -52,6 +54,14 @@ public class CargoInfo implements IEntity {
     private Byte status;
 
     private Byte isDeleted;
+
+    public String getCustomerMobile() {
+        return customerMobile;
+    }
+
+    public void setCustomerMobile(String customerMobile) {
+        this.customerMobile = customerMobile;
+    }
 
     public Long getId() {
         return id;

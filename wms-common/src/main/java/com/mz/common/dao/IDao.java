@@ -85,6 +85,11 @@ public interface IDao<T> {
     int count(Example example);
 
     /**
+     * 计数
+     */
+    int count(QueryParam queryParam);
+
+    /**
      * 逻辑删除（设置hidden_status为0）
      *
      * @param id
@@ -97,5 +102,10 @@ public interface IDao<T> {
      */
     List<Map<String, Object>> executeSql(@Param("sql") String sql);
 
-    List<T> index(QueryParam queryParam);
+    /**
+     * 自定义参数查询
+     * @param queryParam
+     * @return
+     */
+    List<Map> index(QueryParam queryParam);
 }

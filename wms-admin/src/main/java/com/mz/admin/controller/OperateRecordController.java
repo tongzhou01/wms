@@ -2,7 +2,7 @@ package com.mz.admin.controller;
 
 import com.mz.admin.entity.OperateRecord;
 import com.mz.admin.service.OperateRecordService;
-import com.mz.common.entity.Example;
+import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
@@ -31,33 +31,14 @@ public class OperateRecordController {
     /**
      * 分页查询
      *
-     * @param currentPage
-     * @param pageSize
-     * @param startDate
-     * @param endDate
+     * @param queryParam
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
-                  @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                  @RequestParam(value = "startDate", required = false) String startDate,
-                  @RequestParam(value = "endDate", required = false) String endDate
-    ) {
-        Example example = Example.create(OperateRecord.class);
-        example.equal("is_deleted", 0);
-        if (currentPage != null && pageSize != null) {
-            example.setPage(currentPage);
-            example.setPage(pageSize);
-        }
-        if (startDate != null && endDate != null) {
-            example.greatEqual("gmt_create", startDate + " 00:00:00");
-            example.lessEqual("gmt_create", endDate + " 23:59:59");
-        }
-        example.setOrderBy("gmt_create desc");
-        int total = baseService.count(example);
-        List<Map<String, Object>> list = baseService.find(example);
-        return CommonUtil.msg(list).put("total", total);
+    @RequestMapping(value = "list", method = RequestMethod.POST)
+    public R list(@RequestBody QueryParam queryParam) {
+        int count = operateRecordService.count(queryParam);
+        List<Map> index = operateRecordService.index(queryParam);
+        return CommonUtil.msg(index).put("total", count);
     }
 
     /**

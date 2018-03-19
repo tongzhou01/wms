@@ -63,6 +63,15 @@
         <filter-name>CORSFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!-- 登陆拦截器 -->
+    <!--<filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.mz.admin.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>-->
     <!-- shiro的filter -->
     <!--<filter>
         <filter-name>shiroFilter</filter-name>

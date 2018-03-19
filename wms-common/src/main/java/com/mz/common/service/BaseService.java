@@ -70,6 +70,11 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
+    public int count(QueryParam queryParam) {
+        return getDao().count(queryParam);
+    }
+
+    @Override
     public int del(String tableName, Integer id) {
         return getDao().del(tableName, id);
     }
@@ -82,7 +87,7 @@ public abstract class BaseService<T> implements IService<T> {
     }
 
     @Override
-    public List<T> index(QueryParam queryParam) {
+    public List<Map> index(QueryParam queryParam) {
         return getDao().index(queryParam);
     }
 }

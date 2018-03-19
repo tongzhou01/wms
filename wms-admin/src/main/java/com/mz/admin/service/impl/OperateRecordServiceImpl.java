@@ -18,4 +18,5 @@ public class OperateRecordServiceImpl extends BaseService<OperateRecord> impleme
     public IDao<OperateRecord> getDao() {
         return operateRecordDao;
     }
+
 }

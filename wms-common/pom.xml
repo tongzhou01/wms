@@ -18,5 +18,10 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>dayu</artifactId>
+            <version>20160607</version>
+        </dependency>
     </dependencies>
 </project>

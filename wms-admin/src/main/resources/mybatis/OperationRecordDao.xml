@@ -125,4 +125,25 @@
       shelf_no = #{shelfNo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="index" resultType="java.util.Map">
+        SELECT c.*,o.scan_time, o.type FROM operate_record o, cargo_info c WHERE o.cargo_id = c.id AND c.is_deleted = 0
+        <if test="type != null">
+            AND o.type = #{type}
+        </if>
+        <if test="startDate != null and endDate != null">
+            c.gmt_create <![CDATA[>=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+        </if>
+        ORDER BY c.gmt_create DESC
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM operate_record o, cargo_info c WHERE o.cargo_id = c.id AND c.is_deleted = 0
+        <if test="type != null">
+            AND o.type = #{type}
+        </if>
+        <if test="startDate != null and endDate != null">
+            c.gmt_create <![CDATA[>=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+        </if>
+    </select>
 </mapper>

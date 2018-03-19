@@ -7,6 +7,7 @@
         <result column="intl_no" jdbcType="VARCHAR" property="intlNo"/>
         <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
         <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customer_mobile" jdbcType="VARCHAR" property="customerMobile"/>
         <result column="customer_no" jdbcType="VARCHAR" property="customerNo"/>
         <result column="express_company_code" jdbcType="VARCHAR" property="expressCompanyCode"/>
         <result column="express_company" jdbcType="VARCHAR" property="expressCompany"/>
@@ -25,7 +26,7 @@
         <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, cn_no, intl_no, order_no, customer_name, customer_no, express_company_code, express_company,
+        id, cn_no, intl_no, order_no, customer_name, customer_mobile, customer_no, express_company_code, express_company,
         shelf_no, destination, weight, length, wide, height, volume_weight, cargo_charge,
         express_charge, gmt_create, gmt_modify, status, is_deleted
     </sql>
@@ -41,7 +42,7 @@
     </delete>
     <insert id="insert" parameterType="com.mz.admin.entity.CargoInfo">
         insert into cargo_info (id, cn_no, intl_no,
-        order_no, customer_name, customer_no,
+        order_no, customer_name, customer_mobile, customer_no,
         express_company_code, express_company, shelf_no,
         destination, weight, length,
         wide, height, volume_weight,
@@ -49,7 +50,7 @@
         gmt_modify, status, is_deleted
         )
         values (#{id,jdbcType=BIGINT}, #{cnNo,jdbcType=VARCHAR}, #{intlNo,jdbcType=VARCHAR},
-        #{orderNo,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR},
+        #{orderNo,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerMobile,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR},
         #{expressCompanyCode,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, #{shelfNo,jdbcType=VARCHAR},
         #{destination,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{length,jdbcType=DECIMAL},
         #{wide,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{volumeWeight,jdbcType=DECIMAL},
@@ -74,6 +75,9 @@
             </if>
             <if test="customerName != null">
                 customer_name,
+            </if>
+            <if test="customerMobile != null">
+                customer_mobile,
             </if>
             <if test="customerNo != null">
                 customer_no,
@@ -140,6 +144,9 @@
             <if test="customerName != null">
                 #{customerName,jdbcType=VARCHAR},
             </if>
+            <if test="customerMobile != null">
+                #{customerMobile,jdbcType=VARCHAR},
+            </if>
             <if test="customerNo != null">
                 #{customerNo,jdbcType=VARCHAR},
             </if>
@@ -205,6 +212,9 @@
             <if test="customerName != null">
                 customer_name = #{customerName,jdbcType=VARCHAR},
             </if>
+            <if test="customerMobile != null">
+                customer_mobile = #{customerMobile,jdbcType=VARCHAR},
+            </if>
             <if test="customerNo != null">
                 customer_no = #{customerNo,jdbcType=VARCHAR},
             </if>
@@ -262,6 +272,7 @@
         intl_no = #{intlNo,jdbcType=VARCHAR},
         order_no = #{orderNo,jdbcType=VARCHAR},
         customer_name = #{customerName,jdbcType=VARCHAR},
+        customer_mobile = #{customerMobile,jdbcType=VARCHAR},
         customer_no = #{customerNo,jdbcType=VARCHAR},
         express_company_code = #{expressCompanyCode,jdbcType=VARCHAR},
         express_company = #{expressCompany,jdbcType=VARCHAR},
@@ -280,4 +291,5 @@
         is_deleted = #{isDeleted,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
 </mapper>
