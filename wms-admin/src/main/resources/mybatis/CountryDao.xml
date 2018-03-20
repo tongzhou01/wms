@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mz.admin.dao.CountryDao">
+  <resultMap id="BaseResultMap" type="com.mz.admin.entity.Country">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="COUNTRY_CN" jdbcType="VARCHAR" property="countryCn" />
+    <result column="COUNTRY_EN" jdbcType="VARCHAR" property="countryEn" />
+    <result column="COUNTRY_CODE" jdbcType="VARCHAR" property="countryCode" />
+    <result column="HIDDEN_STATUS" jdbcType="INTEGER" property="hiddenStatus" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="HOT" jdbcType="INTEGER" property="hot" />
+    <result column="PINYIN" jdbcType="VARCHAR" property="pinyin" />
+    <result column="SORT" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, COUNTRY_CN, COUNTRY_EN, COUNTRY_CODE, HIDDEN_STATUS, REMARK, HOT, PINYIN, SORT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from country
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from country
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mz.admin.entity.Country">
+    insert into country (ID, COUNTRY_CN, COUNTRY_EN, 
+      COUNTRY_CODE, HIDDEN_STATUS, REMARK, 
+      HOT, PINYIN, SORT)
+    values (#{id,jdbcType=INTEGER}, #{countryCn,jdbcType=VARCHAR}, #{countryEn,jdbcType=VARCHAR}, 
+      #{countryCode,jdbcType=VARCHAR}, #{hiddenStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{hot,jdbcType=INTEGER}, #{pinyin,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mz.admin.entity.Country">
+    insert into country
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="countryCn != null">
+        COUNTRY_CN,
+      </if>
+      <if test="countryEn != null">
+        COUNTRY_EN,
+      </if>
+      <if test="countryCode != null">
+        COUNTRY_CODE,
+      </if>
+      <if test="hiddenStatus != null">
+        HIDDEN_STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="hot != null">
+        HOT,
+      </if>
+      <if test="pinyin != null">
+        PINYIN,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="countryCn != null">
+        #{countryCn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEn != null">
+        #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hiddenStatus != null">
+        #{hiddenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null">
+        #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="pinyin != null">
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.Country">
+    update country
+    <set>
+      <if test="countryCn != null">
+        COUNTRY_CN = #{countryCn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEn != null">
+        COUNTRY_EN = #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        COUNTRY_CODE = #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hiddenStatus != null">
+        HIDDEN_STATUS = #{hiddenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null">
+        HOT = #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="pinyin != null">
+        PINYIN = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.Country">
+    update country
+    set COUNTRY_CN = #{countryCn,jdbcType=VARCHAR},
+      COUNTRY_EN = #{countryEn,jdbcType=VARCHAR},
+      COUNTRY_CODE = #{countryCode,jdbcType=VARCHAR},
+      HIDDEN_STATUS = #{hiddenStatus,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      HOT = #{hot,jdbcType=INTEGER},
+      PINYIN = #{pinyin,jdbcType=VARCHAR},
+      SORT = #{sort,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
