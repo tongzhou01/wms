@@ -135,6 +135,9 @@
             AND c.gmt_create <![CDATA[<=]]> #{startDate}
         </if>
         ORDER BY c.gmt_create DESC
+        <if test="currentPage != null and pageSize!=null">
+            limit ${(currentPage-1) * pageSize},${pageSize}
+        </if>
     </select>
     <select id="count" resultType="java.lang.Integer">
         SELECT count(1) FROM operate_record o, cargo_info c WHERE o.cargo_id = c.id AND c.is_deleted = 0
