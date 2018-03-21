@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/productType")
+@RequestMapping("/api/product/")
 public class ProductTypeController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class ProductTypeController {
         example.equal("is_deleted", 0);
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
-            example.setPage(pageSize);
+            example.setRows(pageSize);
         }
         if (startDate != null && endDate != null) {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
@@ -99,7 +99,7 @@ public class ProductTypeController {
     public R del(@RequestBody Integer[] ids) {
         int i = 0;
         for (int id : ids) {
-            i += baseService.del("package_type", id);
+            i += baseService.del("product_type", id);
         }
         return CommonUtil.msg(ids, i);
     }

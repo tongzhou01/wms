@@ -45,7 +45,7 @@ public class CountryController {
         example.equal("is_deleted", 0);
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
-            example.setPage(pageSize);
+            example.setRows(pageSize);
         }
         if (countryCn != null) {
             example.like("country_cn", countryCn);

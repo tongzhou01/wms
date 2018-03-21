@@ -47,7 +47,7 @@ public class OutboundTypeController {
         example.equal("is_deleted", 0);
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
-            example.setPage(pageSize);
+            example.setRows(pageSize);
         }
         if (startDate != null && endDate != null) {
             example.greatEqual("gmt_create", startDate + " 00:00:00");

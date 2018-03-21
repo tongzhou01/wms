@@ -46,7 +46,8 @@ public class CustomerInfoController {
                   @RequestParam(value = "startDate", required = false) String startDate,
                   @RequestParam(value = "endDate", required = false) String endDate,
                   @RequestParam(value = "customerName", required = false) String customerName,
-                  @RequestParam(value = "customerNo", required = false) String customerNo
+                  @RequestParam(value = "customerNo", required = false) String customerNo,
+                  @RequestParam(value = "customerMobile", required = false) String customerMobile
     ) {
         Example example = Example.create(CustomerInfo.class);
         example.equal("is_deleted", 0);
@@ -54,6 +55,8 @@ public class CustomerInfoController {
             example.like("customer_name", "%" + customerName + "%");
         if (customerNo != null)
             example.like("customer_no", "%" + customerNo + "%");
+        if (customerMobile != null)
+            example.like("customer_mobile", "%" + customerMobile + "%");
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
             example.setRows(pageSize);

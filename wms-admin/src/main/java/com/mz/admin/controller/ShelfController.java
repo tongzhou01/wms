@@ -43,7 +43,7 @@ public class ShelfController {
         example.equal("is_deleted", 0);
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
-            example.setPage(pageSize);
+            example.setRows(pageSize);
         }
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
