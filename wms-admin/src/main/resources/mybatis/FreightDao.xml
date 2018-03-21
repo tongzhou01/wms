@@ -14,12 +14,12 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
     <result column="fuel_charge" jdbcType="DECIMAL" property="fuelCharge" />
-    <result column="remake" jdbcType="VARCHAR" property="remake" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
   </resultMap>
   <sql id="Base_Column_List">
     id, destination, package_type, product_type, init_price, init_weight, stepping_price, 
-    stepping_weight, postcode, gmt_create, create_user_id, fuel_charge, remake, is_deleted
+    stepping_weight, postcode, gmt_create, create_user_id, fuel_charge, remark, is_deleted
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,12 +36,12 @@
       product_type, init_price, init_weight, 
       stepping_price, stepping_weight, postcode, 
       gmt_create, create_user_id, fuel_charge, 
-      remake, is_deleted)
+      remark, is_deleted)
     values (#{id,jdbcType=INTEGER}, #{destination,jdbcType=INTEGER}, #{packageType,jdbcType=INTEGER}, 
       #{productType,jdbcType=INTEGER}, #{initPrice,jdbcType=DECIMAL}, #{initWeight,jdbcType=DECIMAL}, 
       #{steppingPrice,jdbcType=DECIMAL}, #{steppingWeight,jdbcType=DECIMAL}, #{postcode,jdbcType=VARCHAR}, 
       #{gmtCreate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{fuelCharge,jdbcType=DECIMAL}, 
-      #{remake,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER})
+      #{remark,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mz.admin.entity.Freight">
     insert into freight
@@ -82,8 +82,8 @@
       <if test="fuelCharge != null">
         fuel_charge,
       </if>
-      <if test="remake != null">
-        remake,
+      <if test="remark != null">
+        remark,
       </if>
       <if test="isDeleted != null">
         is_deleted,
@@ -126,8 +126,8 @@
       <if test="fuelCharge != null">
         #{fuelCharge,jdbcType=DECIMAL},
       </if>
-      <if test="remake != null">
-        #{remake,jdbcType=VARCHAR},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="isDeleted != null">
         #{isDeleted,jdbcType=INTEGER},
@@ -170,8 +170,8 @@
       <if test="fuelCharge != null">
         fuel_charge = #{fuelCharge,jdbcType=DECIMAL},
       </if>
-      <if test="remake != null">
-        remake = #{remake,jdbcType=VARCHAR},
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="isDeleted != null">
         is_deleted = #{isDeleted,jdbcType=INTEGER},
@@ -192,7 +192,7 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=INTEGER},
       fuel_charge = #{fuelCharge,jdbcType=DECIMAL},
-      remake = #{remake,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       is_deleted = #{isDeleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

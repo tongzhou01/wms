@@ -16,12 +16,12 @@
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
         <result column="emall" jdbcType="VARCHAR" property="emall"/>
-        <result column="remake" jdbcType="VARCHAR" property="remake"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, role_id, user_name, real_name, password, sex, gmt_create, create_user_id, birthday,
-        department, position, mobile, telephone, emall, remake, is_deleted
+        department, position, mobile, telephone, emall, remark, is_deleted
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -38,13 +38,13 @@
         real_name, password, sex,
         gmt_create, create_user_id, birthday,
         department, position, mobile,
-        telephone, emall, remake,
+        telephone, emall, remark,
         is_deleted)
         values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
         #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT},
         #{gmtCreate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{birthday,jdbcType=TIMESTAMP},
         #{department,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
-        #{telephone,jdbcType=VARCHAR}, #{emall,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR},
+        #{telephone,jdbcType=VARCHAR}, #{emall,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
         #{isDeleted,jdbcType=TINYINT})
     </insert>
     <insert id="insertSelective" parameterType="com.mz.admin.entity.UserInfo">
@@ -92,8 +92,8 @@
             <if test="emall != null">
                 emall,
             </if>
-            <if test="remake != null">
-                remake,
+            <if test="remark != null">
+                remark,
             </if>
             <if test="isDeleted != null">
                 is_deleted,
@@ -142,8 +142,8 @@
             <if test="emall != null">
                 #{emall,jdbcType=VARCHAR},
             </if>
-            <if test="remake != null">
-                #{remake,jdbcType=VARCHAR},
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
             </if>
             <if test="isDeleted != null">
                 #{isDeleted,jdbcType=TINYINT},
@@ -192,8 +192,8 @@
             <if test="emall != null">
                 emall = #{emall,jdbcType=VARCHAR},
             </if>
-            <if test="remake != null">
-                remake = #{remake,jdbcType=VARCHAR},
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
             </if>
             <if test="isDeleted != null">
                 is_deleted = #{isDeleted,jdbcType=TINYINT},
@@ -216,7 +216,7 @@
         mobile = #{mobile,jdbcType=VARCHAR},
         telephone = #{telephone,jdbcType=VARCHAR},
         emall = #{emall,jdbcType=VARCHAR},
-        remake = #{remake,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
         is_deleted = #{isDeleted,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>

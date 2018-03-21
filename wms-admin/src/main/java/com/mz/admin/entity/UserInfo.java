@@ -33,7 +33,7 @@ public class UserInfo implements IEntity {
 
     private String emall;
 
-    private String remake;
+    private String remark;
 
     private Byte isDeleted;
 
@@ -149,12 +149,12 @@ public class UserInfo implements IEntity {
         this.emall = emall == null ? null : emall.trim();
     }
 
-    public String getRemake() {
-        return remake;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setRemake(String remake) {
-        this.remake = remake == null ? null : remake.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public Byte getIsDeleted() {

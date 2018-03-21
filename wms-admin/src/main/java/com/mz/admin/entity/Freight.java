@@ -30,7 +30,7 @@ public class Freight implements IEntity{
 
     private BigDecimal fuelCharge;
 
-    private String remake;
+    private String remark;
 
     private Integer isDeleted;
 
@@ -130,12 +130,12 @@ public class Freight implements IEntity{
         this.fuelCharge = fuelCharge;
     }
 
-    public String getRemake() {
-        return remake;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setRemake(String remake) {
-        this.remake = remake == null ? null : remake.trim();
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Integer getIsDeleted() {
