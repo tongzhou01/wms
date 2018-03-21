@@ -161,7 +161,7 @@ CREATE TABLE `user_info` (
   `mobile` varchar(20) DEFAULT '' COMMENT '手机号码',
   `telephone` varchar(20) DEFAULT '' COMMENT '办公电话',
   `emall` varchar(50) DEFAULT '' COMMENT '邮箱',
-  `remake` varchar(250) DEFAULT '' COMMENT '备注',
+  `remark` varchar(250) DEFAULT '' COMMENT '备注',
   `is_deleted` tinyint(11) DEFAULT '0' COMMENT '是否删除 1已删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
