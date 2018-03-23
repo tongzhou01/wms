@@ -13,7 +13,7 @@ public class OperateRecord implements IEntity {
 
     private Date scanTime;
 
-    private Date type;
+    private Byte type;
 
     private Long outboundTypeId;
 
@@ -61,11 +61,11 @@ public class OperateRecord implements IEntity {
         this.scanTime = scanTime;
     }
 
-    public Date getType() {
+    public Byte getType() {
         return type;
     }
 
-    public void setType(Date type) {
+    public void setType(Byte type) {
         this.type = type;
     }
 

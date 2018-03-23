@@ -41,7 +41,9 @@ public class ExpressCompanyController {
                   @RequestParam(value = "currentPage", required = false) Integer currentPage,
                   @RequestParam(value = "pageSize", required = false) Integer pageSize,
                   @RequestParam(value = "startDate", required = false) String startDate,
-                  @RequestParam(value = "endDate", required = false) String endDate
+                  @RequestParam(value = "endDate", required = false) String endDate,
+                  @RequestParam(value = "companyName", required = false) String companyName,
+                  @RequestParam(value = "companyCode", required = false) String companyCode
     ) {
         Example example = Example.create(ExpressCompany.class);
         example.equal("is_deleted", 0);
@@ -53,6 +55,13 @@ public class ExpressCompanyController {
             example.greatEqual("gmt_create", startDate + " 00:00:00");
             example.lessEqual("gmt_create", endDate + " 23:59:59");
         }
+        if (companyName != null) {
+            example.like("company_name", "%" + companyName + "%");
+        }
+        if (companyCode != null) {
+            example.like("company_code", "%" + companyCode + "%");
+        }
+        example.setOrderBy("sort desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
         return CommonUtil.msg(list).put("total", total);

@@ -2,13 +2,14 @@ package com.mz.admin.controller;
 
 import com.mz.admin.entity.ProductType;
 import com.mz.admin.service.ProductTypeService;
-import com.mz.common.entity.Example;
+import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,32 +25,14 @@ public class ProductTypeController {
     /**
      * 分页查询
      *
-     * @param currentPage
-     * @param pageSize
-     * @param startDate
-     * @param endDate
+     * @param param
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
-                  @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                  @RequestParam(value = "startDate", required = false) String startDate,
-                  @RequestParam(value = "endDate", required = false) String endDate
+    @RequestMapping(value = "list", method = RequestMethod.POST)
+    public R list(@RequestBody QueryParam param
     ) {
-        Example example = Example.create(ProductType.class);
-        example.equal("is_deleted", 0);
-        if (currentPage != null && pageSize != null) {
-            example.setPage(currentPage);
-            example.setRows(pageSize);
-        }
-        if (startDate != null && endDate != null) {
-            example.greatEqual("gmt_create", startDate + " 00:00:00");
-            example.lessEqual("gmt_create", endDate + " 23:59:59");
-        }
-        example.setOrderBy("gmt_create desc");
-        int total = baseService.count(example);
-        List<Map<String, Object>> list = baseService.find(example);
+        int total = productTypeService.count(param);
+        List<Map> list = productTypeService.index(param);
         return CommonUtil.msg(list).put("total", total);
     }
 
@@ -61,6 +44,7 @@ public class ProductTypeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody ProductType productType) {
+        productType.setGmtCreate(new Date());
         int i = productTypeService.insertSelective(productType);
         return CommonUtil.msg(i);
     }

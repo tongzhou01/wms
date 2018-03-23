@@ -6,7 +6,7 @@
         <result column="cargo_id" jdbcType="BIGINT" property="cargoId"/>
         <result column="operator" jdbcType="BIGINT" property="operator"/>
         <result column="scan_time" jdbcType="TIMESTAMP" property="scanTime"/>
-        <result column="type" jdbcType="TIMESTAMP" property="type"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
         <result column="outbound_type_id" jdbcType="BIGINT" property="outboundTypeId"/>
         <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
         <result column="shelf_no" jdbcType="VARCHAR" property="shelfNo"/>
@@ -17,23 +17,23 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from operation_record
+        from operate_record
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from operation_record
+    delete from operate_record
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.mz.admin.entity.OperateRecord">
-    insert into operation_record (id, cargo_id, operator, 
+    insert into operate_record (id, cargo_id, operator, 
       scan_time, type, outbound_type_id,
       is_deleted, shelf_no)
     values (#{id,jdbcType=BIGINT}, #{cargoId,jdbcType=BIGINT}, #{operator,jdbcType=BIGINT},
-      #{scanTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TIMESTAMP}, #{outboundTypeId,jdbcType=BIGINT},
+      #{scanTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, #{outboundTypeId,jdbcType=BIGINT},
       #{isDeleted,jdbcType=TINYINT}, #{shelfNo,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.mz.admin.entity.OperateRecord">
-        insert into operation_record
+        insert into operate_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -74,7 +74,7 @@
                 #{scanTime,jdbcType=TIMESTAMP},
             </if>
             <if test="type != null">
-                #{type,jdbcType=TIMESTAMP},
+                #{type,jdbcType=TINYINT},
             </if>
             <if test="outboundTypeId != null">
                 #{outboundTypeId,jdbcType=BIGINT},
@@ -88,7 +88,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.OperateRecord">
-        update operation_record
+        update operate_record
         <set>
             <if test="cargoId != null">
                 cargo_id = #{cargoId,jdbcType=BIGINT},
@@ -100,7 +100,7 @@
                 scan_time = #{scanTime,jdbcType=TIMESTAMP},
             </if>
             <if test="type != null">
-                type = #{type,jdbcType=TIMESTAMP},
+                type = #{type,jdbcType=TINYINT},
             </if>
             <if test="outboundTypeId != null">
                 outbound_type_id = #{outboundTypeId,jdbcType=BIGINT},
@@ -115,11 +115,11 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OperateRecord">
-    update operation_record
+    update operate_record
     set cargo_id = #{cargoId,jdbcType=BIGINT},
       operator = #{operator,jdbcType=BIGINT},
       scan_time = #{scanTime,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT},
       outbound_type_id = #{outboundTypeId,jdbcType=BIGINT},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       shelf_no = #{shelfNo,jdbcType=VARCHAR}

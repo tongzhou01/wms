@@ -18,7 +18,7 @@ public class Criterion {
     private Criterion(String column, String operate, Object value, int type) {
         this.column = column;
         this.operate = operate;
-        this.condition = (this.column + this.operate).toUpperCase();
+        this.condition = (this.column + this.operate);
         this.value = value;
         this.type = type;
     }

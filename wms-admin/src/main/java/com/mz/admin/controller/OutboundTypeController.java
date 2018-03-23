@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,7 @@ public class OutboundTypeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody OutboundType outboundType) {
+        outboundType.setGmtCreate(new Date());
         int i = outboundTypeService.insertSelective(outboundType);
         return CommonUtil.msg(i);
     }

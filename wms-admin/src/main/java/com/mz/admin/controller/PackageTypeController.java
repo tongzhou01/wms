@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +28,11 @@ public class PackageTypeController {
      * @param param
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @RequestMapping(value = "list", method = RequestMethod.POST)
     public R list(@RequestBody QueryParam param
     ) {
-        int total = baseService.count(param);
-        List<Map> list = baseService.index(param);
+        int total = packageTypeService.count(param);
+        List<Map> list = packageTypeService.index(param);
         return CommonUtil.msg(list).put("total", total);
     }
 
@@ -43,6 +44,7 @@ public class PackageTypeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody PackageType packageType) {
+        packageType.setGmtCreate(new Date());
         int i = packageTypeService.insertSelective(packageType);
         return CommonUtil.msg(i);
     }
@@ -85,4 +87,6 @@ public class PackageTypeController {
         }
         return CommonUtil.msg(ids, i);
     }
+
+
 }

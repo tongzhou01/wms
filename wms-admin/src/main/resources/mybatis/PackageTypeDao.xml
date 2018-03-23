@@ -153,13 +153,16 @@
     <select id="index" resultType="java.util.Map">
         select p.*,c.country_cn from package_type p,country c where p.is_deleted = 0 and p.country_id = c.id
         <if test="startDate != null and endDate != null">
-            AND c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND p.gmt_create <![CDATA[>=]]> #{startDate}
+            AND p.gmt_create <![CDATA[<=]]> #{startDate}
         </if>
         <if test="countryCn != null">
             AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")
         </if>
-        ORDER BY c.gmt_create DESC
+        <if test="countryId != null">
+            AND p.country_id = #{countryId}
+        </if>
+        ORDER BY p.gmt_create DESC
         <if test="currentPage != null and pageSize!=null">
             limit ${(currentPage-1) * pageSize},${pageSize}
         </if>
@@ -167,8 +170,8 @@
     <select id="count" resultType="java.lang.Integer">
         select count(1) from package_type p,country c where p.is_deleted = 0 and p.country_id = c.id
         <if test="startDate != null and endDate != null">
-            AND c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND p.gmt_create <![CDATA[>=]]> #{startDate}
+            AND p.gmt_create <![CDATA[<=]]> #{startDate}
         </if>
         <if test="countryCn != null">
             AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")

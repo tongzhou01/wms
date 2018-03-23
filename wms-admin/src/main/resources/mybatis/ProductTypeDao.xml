@@ -150,4 +150,39 @@
       cargo_type = #{cargoType,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="index" resultType="java.util.Map">
+      select pd.*,p.name_cn,p.name_en,c.country_cn
+      from product_type pd,package_type p,country c
+      where pd.is_deleted = 0 and p.country_id = c.id and pd.package_type=p.id
+    <if test="startDate != null and endDate != null">
+      AND pd.gmt_create <![CDATA[>=]]> #{startDate}
+      AND pd.gmt_create <![CDATA[<=]]> #{startDate}
+    </if>
+    <if test="countryCn != null">
+      AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")
+    </if>
+    <if test="packageTypeId != null">
+      AND pd.package_type = #{packageTypeId}
+    </if>
+    ORDER BY pd.gmt_create DESC
+    <if test="currentPage != null and pageSize!=null">
+      limit ${(currentPage-1) * pageSize},${pageSize}
+    </if>
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+      select count(1)
+      from product_type pd,package_type p,country c
+      where pd.is_deleted = 0 and p.country_id = c.id and pd.package_type=p.id
+    <if test="startDate != null and endDate != null">
+      AND pd.gmt_create <![CDATA[>=]]> #{startDate}
+      AND pd.gmt_create <![CDATA[<=]]> #{startDate}
+    </if>
+    <if test="countryCn != null">
+      AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")
+    </if>
+    <if test="packageTypeId != null">
+      AND pd.package_type = #{packageTypeId}
+    </if>
+
+  </select>
 </mapper>
