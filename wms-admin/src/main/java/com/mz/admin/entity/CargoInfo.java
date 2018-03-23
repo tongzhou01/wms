@@ -19,10 +19,6 @@ public class CargoInfo implements IEntity {
 
     private String orderNo;
 
-    private String customerName;
-
-    private String customerMobile;
-
     private String customerNo;
 
     private String expressCompanyCode;
@@ -55,14 +51,6 @@ public class CargoInfo implements IEntity {
 
     private Byte isDeleted;
 
-    public String getCustomerMobile() {
-        return customerMobile;
-    }
-
-    public void setCustomerMobile(String customerMobile) {
-        this.customerMobile = customerMobile;
-    }
-
     public Long getId() {
         return id;
     }
@@ -93,14 +81,6 @@ public class CargoInfo implements IEntity {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo == null ? null : orderNo.trim();
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName == null ? null : customerName.trim();
     }
 
     public String getCustomerNo() {

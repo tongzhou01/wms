@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,7 @@ public class ShelfController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody Shelf shelf) {
+        shelf.setGmtCreate(new Date());
         int i = shelfService.insertSelective(shelf);
         return CommonUtil.msg(i);
     }
