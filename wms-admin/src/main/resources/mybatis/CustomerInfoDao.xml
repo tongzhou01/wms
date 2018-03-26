@@ -174,7 +174,10 @@
         is_deleted = #{isDeleted,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <select id="selectMaxId" resultType="java.lang.Integer">
-        SELECT max(id) id FROM wms.customer_info c WHERE c.is_deleted = 0
+    <select id="selectMaxNumber" resultType="java.lang.Integer">
+        SELECT MAX(SUBSTRING(c.customer_no,4)) FROM customer_info c WHERE c.is_deleted = 0
+    </select>
+    <select id="selectByCustomerNo" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM customer_info WHERE is_deleted = 0 AND customer_no = #{customerNo}
     </select>
 </mapper>

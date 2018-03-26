@@ -1,20 +1,24 @@
 package com.mz.admin.controller;
 
 import com.mz.admin.entity.CargoInfo;
+import com.mz.admin.entity.CustomerInfo;
 import com.mz.admin.entity.OperateRecord;
 import com.mz.admin.model.CargoDetailVO;
 import com.mz.admin.service.CargoInfoService;
+import com.mz.admin.service.CustomerInfoService;
 import com.mz.admin.service.OperateRecordService;
 import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
+import com.mz.common.util.WXPayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * 货物操作
@@ -30,6 +34,8 @@ public class CargoOperateController {
     CargoInfoService cargoInfoService;
     @Autowired
     OperateRecordService operateRecordService;
+    @Autowired
+    CustomerInfoService customerInfoService;
     @Autowired
     IService<Map<String, Object>> baseService;
 
@@ -76,7 +82,14 @@ public class CargoOperateController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody CargoInfo cargoInfo, @RequestParam Byte type) {
+        CustomerInfo customerInfo = customerInfoService.selectByCustomerNo(cargoInfo.getCustomerNo());
+        if (customerInfo == null) {
+            return R.error("未查询到客户信息");
+        }
         cargoInfo.setGmtCreate(new Date());
+        Random random = new Random();
+        long randomNum = WXPayUtil.getCurrentTimestampMs() + random.nextInt(4);
+        cargoInfo.setOrderNo("MZ" + randomNum);
         int i = cargoInfoService.insertSelective(cargoInfo);
         Long id = cargoInfo.getId();
         if (id != null && id > 0) {

@@ -20,7 +20,12 @@ public class CustomerInfoServiceImpl extends BaseService<CustomerInfo> implement
     }
 
     @Override
-    public Integer selectMaxId() {
-        return customerInfoDao.selectMaxId();
+    public Integer selectMaxNumber() {
+        return customerInfoDao.selectMaxNumber();
+    }
+
+    @Override
+    public CustomerInfo selectByCustomerNo(String customerNo) {
+        return customerInfoDao.selectByCustomerNo(customerNo);
     }
 }

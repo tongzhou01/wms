@@ -3,6 +3,7 @@ package com.mz.admin.controller;
 import com.mz.admin.entity.Shelf;
 import com.mz.admin.service.ShelfService;
 import com.mz.common.entity.Example;
+import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 出库类型
+ * 货架
  *
  * @author tongzhou
  * @date 2018-03-13 10:16
@@ -31,23 +32,22 @@ public class ShelfController {
     /**
      * 分页查询
      *
-     * @param currentPage
-     * @param pageSize
+     * @param queryParam
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
-                  @RequestParam(value = "pageSize", required = false) Integer pageSize
-    ) {
+    @RequestMapping(value = "list", method = RequestMethod.POST)
+    public R list(@RequestBody QueryParam queryParam
+                  ) {
         Example example = Example.create(Shelf.class);
         example.equal("is_deleted", 0);
+        Integer currentPage = (Integer) queryParam.get("currentPage");
+        Integer pageSize = (Integer) queryParam.get("pageSize");
         if (currentPage != null && pageSize != null) {
             example.setPage(currentPage);
             example.setRows(pageSize);
         }
         int total = baseService.count(example);
-        List<Map<String, Object>> list = baseService.find(example);
+        List<Map> list = shelfService.index(queryParam);
         return CommonUtil.msg(list).put("total", total);
     }
 

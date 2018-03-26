@@ -334,7 +334,7 @@
         ci.balance,
         ci.total_amount
         FROM cargo_info c,operate_record o, customer_info ci
-        WHERE c.id = o.cargo_id AND ci.customer_no = c.customer_no AND c.is_deleted = 0
+        WHERE c.id = o.cargo_id AND ci.customer_no = c.customer_no AND c.is_deleted = 0 AND c.shelf_no = #{shelfNo}
         <if test="orderNo != null">
             AND c.order_no LIKE CONCAT("%",#{orderNo},"%")
         </if>
