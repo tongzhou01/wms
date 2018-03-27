@@ -130,9 +130,15 @@
         <if test="type != null">
             AND o.type = #{type}
         </if>
+        <if test="orderNo != null">
+            AND c.order_no LIKE CONCAT("%",#{orderNo},"%")
+        </if>
+        <if test="cnNo != null">
+            AND c.cn_no LIKE CONCAT("%",#{cnNo},"%")
+        </if>
         <if test="startDate != null and endDate != null">
-            c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND c.gmt_create <![CDATA[>=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
         ORDER BY c.gmt_create DESC
         <if test="currentPage != null and pageSize!=null">
@@ -145,8 +151,8 @@
             AND o.type = #{type}
         </if>
         <if test="startDate != null and endDate != null">
-            c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND c.gmt_create <![CDATA[>=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
     </select>
 </mapper>
