@@ -59,6 +59,10 @@ public class ShelfController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody Shelf shelf) {
+        Shelf shelf1 = shelfService.selectByShelfNo(shelf.getShelfNo());
+        if (shelf1 != null) {
+            return R.error("货架号已存在");
+        }
         shelf.setGmtCreate(new Date());
         int i = shelfService.insertSelective(shelf);
         return CommonUtil.msg(i);

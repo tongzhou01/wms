@@ -18,4 +18,9 @@ public class ShelfServiceImpl extends BaseService<Shelf> implements ShelfService
     public IDao<Shelf> getDao() {
         return shelfDao;
     }
+
+    @Override
+    public Shelf selectByShelfNo(String shelfNo) {
+        return shelfDao.selectByShelfNo(shelfNo);
+    }
 }

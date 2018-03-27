@@ -81,6 +81,7 @@
     </update>
     <select id="index" resultType="java.util.Map">
         SELECT
+        s.id,
 	    s.shelf_no,
 	    IFNULL(v.a,0) `in`,
         IFNULL(v.b,0) `out`
@@ -92,8 +93,15 @@
 		FROM operate_record o WHERE o.is_deleted = 0  GROUP BY o.shelf_no) v ON s.shelf_no = v.shelf_no
 		WHERE
 		s.is_deleted = 0
+        <if test="shelfNo != null">
+            AND s.shelf_no LIKE CONCAT("%",#{shelfNo},"%")
+        </if>
+        ORDER BY s.gmt_create DESC
         <if test="currentPage != null and pageSize!=null">
             limit ${(currentPage-1) * pageSize},${pageSize}
         </if>
+    </select>
+    <select id="selectByShelfNo" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM shelf WHERE is_deleted = 0 AND shelf_no = #{shelfNo}
     </select>
 </mapper>

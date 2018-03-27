@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShelfDao extends IDao<Shelf>{
+    Shelf selectByShelfNo(String shelfNo);
 }
