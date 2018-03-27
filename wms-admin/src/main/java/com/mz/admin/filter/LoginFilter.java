@@ -36,19 +36,19 @@ public class LoginFilter implements Filter {
                     if (time <= 1440) {
                         chain.doFilter(req, resp);
                     } else {
-                        httpServletResponse.sendError(401, "登陆失败,登录超时");
+                        httpServletResponse.sendError(500, "登陆失败,登录超时");
                         return;//登陆失败
                     }
                 } else {
-                    httpServletResponse.sendError(401, "登陆失败,登录超时");
+                    httpServletResponse.sendError(500, "登陆失败,登录超时");
                     return;//登陆失败
                 }
             } else {
-                httpServletResponse.sendError(401, "登陆失败，解析失败");
+                httpServletResponse.sendError(500, "登陆失败，解析失败");
                 return;
             }
         } else {
-            httpServletResponse.sendError(401, "登陆失败");
+            httpServletResponse.sendError(500, "登陆失败");
             return;
         }
     }
