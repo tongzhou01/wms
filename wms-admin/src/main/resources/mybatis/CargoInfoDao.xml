@@ -9,6 +9,8 @@
         <result column="customer_no" jdbcType="VARCHAR" property="customerNo"/>
         <result column="express_company_code" jdbcType="VARCHAR" property="expressCompanyCode"/>
         <result column="express_company" jdbcType="VARCHAR" property="expressCompany"/>
+        <result column="express_company_code_en" jdbcType="VARCHAR" property="expressCompanyCodeEn"/>
+        <result column="express_company_en" jdbcType="VARCHAR" property="expressCompanyEn"/>
         <result column="shelf_no" jdbcType="VARCHAR" property="shelfNo"/>
         <result column="destination" jdbcType="VARCHAR" property="destination"/>
         <result column="weight" jdbcType="DECIMAL" property="weight"/>
@@ -22,6 +24,8 @@
         <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="package_type_id" jdbcType="BIGINT" property="packageTypeId"/>
+        <result column="product_type_id" jdbcType="BIGINT" property="productTypeId"/>
     </resultMap>
     <resultMap id="CargoDetail" type="com.mz.admin.model.CargoDetailVO" autoMapping="true">
         <association property="customerInfo" javaType="com.mz.admin.entity.CustomerInfo" autoMapping="true">
@@ -33,9 +37,9 @@
         </collection>
     </resultMap>
     <sql id="Base_Column_List">
-        id, cn_no, intl_no, order_no, customer_no, express_company_code, express_company,
+        id, cn_no, intl_no, order_no, customer_no, express_company_code, express_company,express_company_code_en, express_company_en,
         shelf_no, destination, weight, length, wide, height, volume_weight, cargo_charge,
-        express_charge, gmt_create, gmt_modify, status, is_deleted
+        express_charge, gmt_create, gmt_modify, status, is_deleted, package_type_id, product_type_id
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -47,24 +51,6 @@
         delete from cargo_info
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="com.mz.admin.entity.CargoInfo">
-        insert into cargo_info (id, cn_no, intl_no,
-        order_no, customer_no,
-        express_company_code, express_company, shelf_no,
-        destination, weight, length,
-        wide, height, volume_weight,
-        cargo_charge, express_charge, gmt_create,
-        gmt_modify, status, is_deleted
-        )
-        values (#{id,jdbcType=BIGINT}, #{cnNo,jdbcType=VARCHAR}, #{intlNo,jdbcType=VARCHAR},
-        #{orderNo,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR},
-        #{expressCompanyCode,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, #{shelfNo,jdbcType=VARCHAR},
-        #{destination,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, #{length,jdbcType=DECIMAL},
-        #{wide,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{volumeWeight,jdbcType=DECIMAL},
-        #{cargoCharge,jdbcType=DECIMAL}, #{expressCharge,jdbcType=DECIMAL}, #{gmtCreate,jdbcType=TIMESTAMP},
-        #{gmtModify,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}
-        )
-    </insert>
     <insert id="insertSelective" parameterType="com.mz.admin.entity.CargoInfo" useGeneratedKeys="true" keyProperty="id">
         insert into cargo_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -88,6 +74,12 @@
             </if>
             <if test="expressCompany != null">
                 express_company,
+            </if>
+            <if test="expressCompanyCodeEn != null">
+                express_company_code_en,
+            </if>
+            <if test="expressCompanyEn != null">
+                express_company_en,
             </if>
             <if test="shelfNo != null">
                 shelf_no,
@@ -128,6 +120,12 @@
             <if test="isDeleted != null">
                 is_deleted,
             </if>
+            <if test="packageTypeId != null">
+                package_type_id,
+            </if>
+            <if test="productTypeId != null">
+                product_type_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -150,6 +148,12 @@
             </if>
             <if test="expressCompany != null">
                 #{expressCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompanyCodeEn != null">
+                #{expressCompanyCodeEn,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompanyEn != null">
+                #{expressCompanyEn,jdbcType=VARCHAR},
             </if>
             <if test="shelfNo != null">
                 #{shelfNo,jdbcType=VARCHAR},
@@ -190,6 +194,12 @@
             <if test="isDeleted != null">
                 #{isDeleted,jdbcType=TINYINT},
             </if>
+            <if test="packageTypeId != null">
+                #{packageTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="productTypeId != null">
+                #{productTypeId,jdbcType=BIGINT},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.CargoInfo">
@@ -212,6 +222,12 @@
             </if>
             <if test="expressCompany != null">
                 express_company = #{expressCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompanyCodeEn != null">
+                express_company_code_en = #{expressCompanyCodeEn,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompanyEn != null">
+                express_company_en = #{expressCompanyEn,jdbcType=VARCHAR},
             </if>
             <if test="shelfNo != null">
                 shelf_no = #{shelfNo,jdbcType=VARCHAR},
@@ -252,6 +268,12 @@
             <if test="isDeleted != null">
                 is_deleted = #{isDeleted,jdbcType=TINYINT},
             </if>
+            <if test="packageTypeId != null">
+                package_type_id = #{packageTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="productTypeId != null">
+                product_type_id = #{productTypeId,jdbcType=BIGINT},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -263,6 +285,8 @@
         customer_no = #{customerNo,jdbcType=VARCHAR},
         express_company_code = #{expressCompanyCode,jdbcType=VARCHAR},
         express_company = #{expressCompany,jdbcType=VARCHAR},
+        express_company_code_en = #{expressCompanyCodeEn,jdbcType=VARCHAR},
+        express_company_en = #{expressCompanyEn,jdbcType=VARCHAR},
         shelf_no = #{shelfNo,jdbcType=VARCHAR},
         destination = #{destination,jdbcType=VARCHAR},
         weight = #{weight,jdbcType=DECIMAL},
@@ -275,7 +299,9 @@
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
         status = #{status,jdbcType=TINYINT},
-        is_deleted = #{isDeleted,jdbcType=TINYINT}
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+        package_type_id = #{packageTypeId,jdbcType=BIGINT},
+        product_type_id = #{productTypeId,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
     <select id="index" resultType="java.util.Map">
@@ -291,16 +317,21 @@
         ci.total_amount
         FROM cargo_info c,operate_record o, customer_info ci
         WHERE c.id = o.cargo_id AND ci.customer_no = c.customer_no AND c.is_deleted = 0
-        AND o.type = #{type}
+        <if test="type != null">
+            AND o.type = #{type}
+        </if>
         <if test="orderNo != null">
             AND c.order_no LIKE CONCAT("%",#{orderNo},"%")
         </if>
         <if test="customerNo != null">
             AND c.customer_no LIKE CONCAT("%",#{customerNo},"%")
         </if>
+        <if test="customerMobile != null">
+            AND ci.customer_mobile LIKE CONCAT("%",#{customerMobile},"%")
+        </if>
         <if test="startDate != null and endDate != null">
             AND c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
         ORDER BY o.scan_time DESC
         <if test="currentPage != null and pageSize!=null">
@@ -308,17 +339,23 @@
         </if>
     </select>
     <select id="count" resultType="java.lang.Integer">
-        SELECT count(1) FROM cargo_info c,operate_record o, customer_info ci WHERE c.id = o.cargo_id AND ci.customer_no = c.customer_no AND c.is_deleted = 0
+        SELECT count(1) FROM cargo_info c,operate_record o, customer_info ci WHERE c.id = o.cargo_id AND ci.customer_no
+        = c.customer_no AND c.is_deleted = 0
+        <if test="type != null">
             AND o.type = #{type}
+        </if>
         <if test="orderNo != null">
             AND c.order_no LIKE CONCAT("%",#{orderNo},"%")
         </if>
         <if test="customerNo != null">
             AND c.customer_no LIKE CONCAT("%",#{customerNo},"%")
         </if>
+        <if test="shelfNo != null">
+            AND c.shelf_no = #{shelfNo}
+        </if>
         <if test="startDate != null and endDate != null">
             AND c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
     </select>
     <select id="getDetail" resultMap="CargoDetail">
@@ -343,11 +380,19 @@
         </if>
         <if test="startDate != null and endDate != null">
             AND c.gmt_create <![CDATA[>=]]> #{startDate}
-            AND c.gmt_create <![CDATA[<=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
         ORDER BY o.scan_time DESC
         <if test="currentPage != null and pageSize!=null">
             limit ${(currentPage-1) * pageSize},${pageSize}
         </if>
+    </select>
+    <select id="countDetail" resultType="java.lang.Integer">
+        SELECT count(1) FROM cargo_info c WHERE c.is_deleted = 0
+        <if test="startDate != null and endDate != null">
+            AND c.gmt_create <![CDATA[>=]]> #{startDate}
+            AND c.gmt_create <![CDATA[<=]]> #{endDate}
+        </if>
+        AND shelf_no = #{shelfNo}
     </select>
 </mapper>

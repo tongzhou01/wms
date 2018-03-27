@@ -27,4 +27,9 @@ public class CargoInfoServiceImpl extends BaseService<CargoInfo> implements Carg
     public List<CargoDetailVO> getDetail(QueryParam param) {
         return cargoInfoDao.getDetail(param);
     }
+
+    @Override
+    public int countDetail(QueryParam param) {
+        return cargoInfoDao.countDetail(param);
+    }
 }

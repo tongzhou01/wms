@@ -25,6 +25,10 @@ public class CargoInfo implements IEntity {
 
     private String expressCompany;
 
+    private String expressCompanyCodeEn;
+
+    private String expressCompanyEn;
+
     private String shelfNo;
 
     private String destination;
@@ -50,6 +54,42 @@ public class CargoInfo implements IEntity {
     private Byte status;
 
     private Byte isDeleted;
+
+    private Long packageTypeId;
+
+    private Long productTypeId;
+
+    public String getExpressCompanyCodeEn() {
+        return expressCompanyCodeEn;
+    }
+
+    public void setExpressCompanyCodeEn(String expressCompanyCodeEn) {
+        this.expressCompanyCodeEn = expressCompanyCodeEn;
+    }
+
+    public String getExpressCompanyEn() {
+        return expressCompanyEn;
+    }
+
+    public void setExpressCompanyEn(String expressCompanyEn) {
+        this.expressCompanyEn = expressCompanyEn;
+    }
+
+    public Long getPackageTypeId() {
+        return packageTypeId;
+    }
+
+    public void setPackageTypeId(Long packageTypeId) {
+        this.packageTypeId = packageTypeId;
+    }
+
+    public Long getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(Long productTypeId) {
+        this.productTypeId = productTypeId;
+    }
 
     public Long getId() {
         return id;

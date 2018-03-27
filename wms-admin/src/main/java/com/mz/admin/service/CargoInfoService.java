@@ -9,5 +9,17 @@ import java.util.List;
 
 public interface CargoInfoService extends IService<CargoInfo>{
 
+    /**
+     * 查询详细
+     * @param param
+     * @return
+     */
     List<CargoDetailVO> getDetail(QueryParam param);
+
+    /**
+     * 查询详细总数
+     * @param param
+     * @return
+     */
+    int countDetail(QueryParam param);
 }

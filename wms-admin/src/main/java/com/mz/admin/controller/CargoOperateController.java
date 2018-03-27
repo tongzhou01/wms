@@ -69,7 +69,7 @@ public class CargoOperateController {
     @RequestMapping(value = "getDetail", method = RequestMethod.POST)
     public R getDetail(@RequestBody QueryParam param
     ) {
-        int total = cargoInfoService.count(param);
+        int total = cargoInfoService.countDetail(param);
         List<CargoDetailVO> list = cargoInfoService.getDetail(param);
         return CommonUtil.msg(list).put("total", total);
     }

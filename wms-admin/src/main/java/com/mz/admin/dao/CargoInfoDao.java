@@ -12,4 +12,6 @@ import java.util.List;
 public interface CargoInfoDao extends IDao<CargoInfo> {
 
     List<CargoDetailVO> getDetail(QueryParam param);
+
+    int countDetail(QueryParam param);
 }
