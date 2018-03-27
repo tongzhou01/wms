@@ -2,14 +2,16 @@ package com.mz.admin.controller;
 
 import com.mz.admin.entity.Freight;
 import com.mz.admin.service.FreightService;
-import com.mz.common.entity.Example;
+import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,36 +28,18 @@ public class FreightController {
     FreightService freightService;
 
     @Autowired
-    IService<Map<String,Object>> baseService;
+    IService<Map<String, Object>> baseService;
+
     /**
      * 分页查询
      *
-     * @param currentPage
-     * @param pageSize
-     * @param startDate
-     * @param endDate
+     * @param queryParam
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public R list(//@RequestBody Map<String, Object> param
-                  @RequestParam(value = "currentPage", required = false) Integer currentPage,
-                  @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                  @RequestParam(value = "startDate", required = false) String startDate,
-                  @RequestParam(value = "endDate", required = false) String endDate
-    ) {
-        Example example = Example.create(Freight.class);
-        example.equal("is_deleted", 0);
-        if (currentPage != null && pageSize != null) {
-            example.setPage(currentPage);
-            example.setRows(pageSize);
-        }
-        if (startDate != null && endDate != null) {
-            example.greatEqual("gmt_create", startDate + " 00:00:00");
-            example.lessEqual("gmt_create", endDate + " 23:59:59");
-        }
-        example.setOrderBy("gmt_create desc");
-        int total = baseService.count(example);
-        List<Map<String, Object>> list = baseService.find(example);
+    @RequestMapping(value = "list", method = RequestMethod.POST)
+    public R list(@RequestBody QueryParam queryParam) {
+        int total = freightService.countDetail(queryParam);
+        List<Map> list = freightService.selectFreightDetail(queryParam);
         return CommonUtil.msg(list).put("total", total);
     }
 
@@ -67,6 +51,7 @@ public class FreightController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody Freight freight) {
+        //freightService.selectFreight();
         freight.setGmtCreate(new Date());
         int i = freightService.insertSelective(freight);
         return CommonUtil.msg(i);
@@ -110,4 +95,38 @@ public class FreightController {
         }
         return CommonUtil.msg(ids, i);
     }
+
+    /**
+     * 订单运费计算
+     *
+     * @param queryParam
+     * @return
+     */
+    @RequestMapping(value = "/freight_price", method = RequestMethod.POST)
+    @ResponseBody
+    public R getFreightPrice(@RequestBody QueryParam queryParam
+                             ) {
+        BigDecimal weight = BigDecimal.valueOf(Double.valueOf(queryParam.get("weight").toString()));
+        Freight freightInfo = freightService.selectFreight(queryParam);
+        Map<String, Object> map = new HashMap<>();
+        if (freightInfo != null) {
+            BigDecimal initPrice = freightInfo.getInitPrice();//初始价格
+            BigDecimal initWeight = freightInfo.getInitWeight();//首重
+            BigDecimal steppingPrice = freightInfo.getSteppingPrice();//续重价格
+            BigDecimal steppingWeight = freightInfo.getSteppingWeight();//步进
+            BigDecimal fuelCharge = freightInfo.getFuelCharge();//步进
+            BigDecimal finalPrice = BigDecimal.valueOf(0);
+            if (weight.compareTo(initWeight) == -1) {//-1表示小于，0是等于，1是大于
+                finalPrice = initPrice.add(fuelCharge);
+            } else {
+                finalPrice = ((weight.subtract(initWeight)).divide(steppingWeight, 0, BigDecimal.ROUND_UP)).multiply(steppingPrice).add(fuelCharge).add(initPrice);
+            }
+            map.put("finalPrice", finalPrice);
+            map.put("priceId", freightInfo.getId());
+            return CommonUtil.msg(map);
+        } else {
+            return CommonUtil.msg("未查询到运费信息");
+        }
+    }
+
 }

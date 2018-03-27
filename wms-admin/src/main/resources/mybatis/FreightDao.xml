@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mz.admin.dao.FreightDao">
-  <resultMap id="BaseResultMap" type="com.mz.admin.entity.Freight">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="destination" jdbcType="INTEGER" property="destination" />
-    <result column="package_type" jdbcType="INTEGER" property="packageType" />
-    <result column="product_type" jdbcType="INTEGER" property="productType" />
-    <result column="init_price" jdbcType="DECIMAL" property="initPrice" />
-    <result column="init_weight" jdbcType="DECIMAL" property="initWeight" />
-    <result column="stepping_price" jdbcType="DECIMAL" property="steppingPrice" />
-    <result column="stepping_weight" jdbcType="DECIMAL" property="steppingWeight" />
-    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
-    <result column="fuel_charge" jdbcType="DECIMAL" property="fuelCharge" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.mz.admin.entity.Freight">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="destination" jdbcType="INTEGER" property="destination"/>
+        <result column="package_type" jdbcType="INTEGER" property="packageType"/>
+        <result column="product_type" jdbcType="INTEGER" property="productType"/>
+        <result column="init_price" jdbcType="DECIMAL" property="initPrice"/>
+        <result column="init_weight" jdbcType="DECIMAL" property="initWeight"/>
+        <result column="stepping_price" jdbcType="DECIMAL" property="steppingPrice"/>
+        <result column="stepping_weight" jdbcType="DECIMAL" property="steppingWeight"/>
+        <result column="postcode" jdbcType="VARCHAR" property="postcode"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="fuel_charge" jdbcType="DECIMAL" property="fuelCharge"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, destination, package_type, product_type, init_price, init_weight, stepping_price, 
     stepping_weight, postcode, gmt_create, create_user_id, fuel_charge, remark, is_deleted
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from freight
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from freight
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from freight
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mz.admin.entity.Freight">
+    <insert id="insert" parameterType="com.mz.admin.entity.Freight">
     insert into freight (id, destination, package_type, 
       product_type, init_price, init_weight, 
       stepping_price, stepping_weight, postcode, 
@@ -43,143 +43,143 @@
       #{gmtCreate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{fuelCharge,jdbcType=DECIMAL}, 
       #{remark,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.mz.admin.entity.Freight">
-    insert into freight
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="destination != null">
-        destination,
-      </if>
-      <if test="packageType != null">
-        package_type,
-      </if>
-      <if test="productType != null">
-        product_type,
-      </if>
-      <if test="initPrice != null">
-        init_price,
-      </if>
-      <if test="initWeight != null">
-        init_weight,
-      </if>
-      <if test="steppingPrice != null">
-        stepping_price,
-      </if>
-      <if test="steppingWeight != null">
-        stepping_weight,
-      </if>
-      <if test="postcode != null">
-        postcode,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="createUserId != null">
-        create_user_id,
-      </if>
-      <if test="fuelCharge != null">
-        fuel_charge,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="isDeleted != null">
-        is_deleted,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="destination != null">
-        #{destination,jdbcType=INTEGER},
-      </if>
-      <if test="packageType != null">
-        #{packageType,jdbcType=INTEGER},
-      </if>
-      <if test="productType != null">
-        #{productType,jdbcType=INTEGER},
-      </if>
-      <if test="initPrice != null">
-        #{initPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="initWeight != null">
-        #{initWeight,jdbcType=DECIMAL},
-      </if>
-      <if test="steppingPrice != null">
-        #{steppingPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="steppingWeight != null">
-        #{steppingWeight,jdbcType=DECIMAL},
-      </if>
-      <if test="postcode != null">
-        #{postcode,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null">
-        #{createUserId,jdbcType=INTEGER},
-      </if>
-      <if test="fuelCharge != null">
-        #{fuelCharge,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        #{isDeleted,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.Freight">
-    update freight
-    <set>
-      <if test="destination != null">
-        destination = #{destination,jdbcType=INTEGER},
-      </if>
-      <if test="packageType != null">
-        package_type = #{packageType,jdbcType=INTEGER},
-      </if>
-      <if test="productType != null">
-        product_type = #{productType,jdbcType=INTEGER},
-      </if>
-      <if test="initPrice != null">
-        init_price = #{initPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="initWeight != null">
-        init_weight = #{initWeight,jdbcType=DECIMAL},
-      </if>
-      <if test="steppingPrice != null">
-        stepping_price = #{steppingPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="steppingWeight != null">
-        stepping_weight = #{steppingWeight,jdbcType=DECIMAL},
-      </if>
-      <if test="postcode != null">
-        postcode = #{postcode,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createUserId != null">
-        create_user_id = #{createUserId,jdbcType=INTEGER},
-      </if>
-      <if test="fuelCharge != null">
-        fuel_charge = #{fuelCharge,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.Freight">
+    <insert id="insertSelective" parameterType="com.mz.admin.entity.Freight">
+        insert into freight
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="destination != null">
+                destination,
+            </if>
+            <if test="packageType != null">
+                package_type,
+            </if>
+            <if test="productType != null">
+                product_type,
+            </if>
+            <if test="initPrice != null">
+                init_price,
+            </if>
+            <if test="initWeight != null">
+                init_weight,
+            </if>
+            <if test="steppingPrice != null">
+                stepping_price,
+            </if>
+            <if test="steppingWeight != null">
+                stepping_weight,
+            </if>
+            <if test="postcode != null">
+                postcode,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="fuelCharge != null">
+                fuel_charge,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="destination != null">
+                #{destination,jdbcType=INTEGER},
+            </if>
+            <if test="packageType != null">
+                #{packageType,jdbcType=INTEGER},
+            </if>
+            <if test="productType != null">
+                #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="initPrice != null">
+                #{initPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="initWeight != null">
+                #{initWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="steppingPrice != null">
+                #{steppingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="steppingWeight != null">
+                #{steppingWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="postcode != null">
+                #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="fuelCharge != null">
+                #{fuelCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mz.admin.entity.Freight">
+        update freight
+        <set>
+            <if test="destination != null">
+                destination = #{destination,jdbcType=INTEGER},
+            </if>
+            <if test="packageType != null">
+                package_type = #{packageType,jdbcType=INTEGER},
+            </if>
+            <if test="productType != null">
+                product_type = #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="initPrice != null">
+                init_price = #{initPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="initWeight != null">
+                init_weight = #{initWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="steppingPrice != null">
+                stepping_price = #{steppingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="steppingWeight != null">
+                stepping_weight = #{steppingWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="postcode != null">
+                postcode = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="fuelCharge != null">
+                fuel_charge = #{fuelCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.Freight">
     update freight
     set destination = #{destination,jdbcType=INTEGER},
       package_type = #{packageType,jdbcType=INTEGER},
@@ -196,4 +196,65 @@
       is_deleted = #{isDeleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectFreightDetail" resultType="java.util.Map">
+        select i.*,
+        c.country_cn,
+        pk.name_cn,
+        pd.product_name
+        from
+        freight i,
+        country c,
+        package_type pk,
+        product_type pd
+        where i.is_deleted = 0
+        and
+        i.DESTINATION = c.id
+        and i.PACKAGE_TYPE = pk.id
+        and i.PRODUCT_TYPE = pd.id
+        <if test=" country != null ">
+            and c.country_cn like '%${country}%'
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND i.gmt_create <![CDATA[>=]]> #{startDate}
+            AND i.gmt_create <![CDATA[<=]]> #{endDate}
+        </if>
+        order by i.gmt_create desc
+        <if test="currentPage != null and pageSize!=null">
+            limit ${(currentPage-1) * pageSize},${pageSize}
+        </if>
+    </select>
+    <select id="countDetail" resultType="java.lang.Integer">
+        select count(1) total
+        from
+        freight i,
+        country c,
+        package_type pk,
+        product_type pd
+        where i.is_deleted = 0
+        and
+        i.DESTINATION = c.id
+        and i.PACKAGE_TYPE = pk.id
+        and i.PRODUCT_TYPE =
+        pd.id
+        <if test=" country != null ">
+            and c.country_cn like '%${country}%'
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND i.gmt_create <![CDATA[>=]]> #{startDate}
+            AND i.gmt_create <![CDATA[<=]]> #{endDate}
+        </if>
+    </select>
+    <select id="validatePrice" resultType="java.lang.Integer">
+        SELECT count(1) from freight i WHERE i.DESTINATION = #{0} and
+        i.PACKAGE_TYPE = #{1} and i.PRODUCT_TYPE=#{2} and is_deleted = 0
+        <if test="param4 != null">
+            and id <![CDATA[<>]]> #{3}
+        </if>
+    </select>
+    <select id="selectFreight" resultMap="BaseResultMap">
+        SELECT * from freight
+        i WHERE i.DESTINATION = #{countryId} and
+        i.PACKAGE_TYPE = #{packageTypeId} and
+        i.PRODUCT_TYPE=#{productTypeId} and is_deleted = 0
+  </select>
 </mapper>
