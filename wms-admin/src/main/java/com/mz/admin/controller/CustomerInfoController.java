@@ -80,7 +80,7 @@ public class CustomerInfoController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody CustomerInfo customerInfo) {
         Integer maxNumber = customerInfoService.selectMaxNumber();
-        customerInfo.setCustomerNo("MZA" + (maxNumber == null ? 1 : maxNumber + 1));
+        customerInfo.setCustomerNo("MZA" + (maxNumber == null ? 100001 : maxNumber + 1));
         customerInfo.setGmtCreate(new Date());
         int i = customerInfoService.insertSelective(customerInfo);
         return CommonUtil.msg(i);
