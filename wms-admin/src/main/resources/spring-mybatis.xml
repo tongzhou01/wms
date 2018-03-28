@@ -75,17 +75,20 @@
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
             <!-- 添加 -->
-            <tx:method name="add*" />
+            <tx:method name="insert*" />
             <!-- 修改 -->
-            <tx:method name="mod*" />
+            <tx:method name="update*" />
             <!-- 删除 -->
             <tx:method name="del*" />
             <!-- 如果需要用到事务的非以上方法，在Service方法前加 tx -->
             <tx:method name="tx*" />
-            <tx:method name="load*" read-only="true" />
-            <tx:method name="find*" read-only="true" />
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="index*" read-only="true" />
+            <tx:method name="count*" read-only="true" />
             <tx:method name="select*" read-only="true" />
             <tx:method name="list*" read-only="true" />
+            <tx:method name="find*" read-only="true" />
+            <tx:method name="load*" read-only="true" />
         </tx:attributes>
     </tx:advice>
     <!-- 事务 aop 配置 -->

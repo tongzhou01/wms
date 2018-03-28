@@ -1,15 +1,17 @@
 package com.mz.admin.filter;
 
+import com.mz.common.component.RedisCache;
+import com.mz.common.util.SpringContextUtil;
 import com.mz.common.util.WebTokenUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
-
 public class LoginFilter implements Filter {
+
+    private RedisCache redisCache = (RedisCache) SpringContextUtil.getBean("redisCache");
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -26,29 +28,19 @@ public class LoginFilter implements Filter {
             return;
         }
         String token = ((HttpServletRequest) req).getHeader("token");
+        //System.out.println(redisCache);
         if (token != null) {
             Map<String, Object> map = WebTokenUtil.parserJavaWebToken(token);
-            if (map != null) {//登陆成功
-                if (map.get("createTime") != null) {
-                    long createTime = Long.valueOf(map.get("createTime").toString());
-                    long nowTime = new Date().getTime() - createTime;
-                    long time = nowTime / (1000 * 60);
-                    if (time <= 1440) {
-                        chain.doFilter(req, resp);
-                    } else {
-                        httpServletResponse.sendError(500, "登陆失败,登录超时");
-                        return;//登陆失败
-                    }
-                } else {
-                    httpServletResponse.sendError(500, "登陆失败,登录超时");
-                    return;//登陆失败
-                }
+            //System.out.println("map = >>>>>>>" + JSON.toJSONString(map));
+            if (redisCache.getValue(token) != null) {//登陆成功
+                //System.out.println("登陆成功" + redisCache.getValue(token).toString());
+                chain.doFilter(req, resp);
             } else {
                 httpServletResponse.sendError(500, "登陆失败，解析失败");
                 return;
             }
         } else {
-            httpServletResponse.sendError(500, "登陆失败");
+            httpServletResponse.sendError(500, "登陆失败,token为null");
             return;
         }
     }
