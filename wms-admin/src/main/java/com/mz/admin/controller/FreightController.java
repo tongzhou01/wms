@@ -51,7 +51,15 @@ public class FreightController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public R add(@RequestBody Freight freight) {
-        //freightService.selectFreight();
+        Map map = new HashMap();
+        map.put("countryId",freight.getDestination());
+        map.put("packageTypeId",freight.getPackageType());
+        map.put("productTypeId",freight.getProductType());
+        QueryParam queryParam = new QueryParam(map);
+        Freight freight1 = freightService.selectFreight(queryParam);
+        if (freight1 == null) {
+            return R.error("该类型运费已存在");
+        }
         freight.setGmtCreate(new Date());
         int i = freightService.insertSelective(freight);
         return CommonUtil.msg(i);
