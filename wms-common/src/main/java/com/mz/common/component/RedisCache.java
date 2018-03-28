@@ -4,6 +4,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Redis模板
@@ -18,6 +19,9 @@ public class RedisCache {
 
     public void setValue(Object key, Object value) {
         redisTemplate.opsForValue().set(key, value);
+    }
+    public void setValue(Object key, Object value, long timeout, TimeUnit unit) {
+        redisTemplate.opsForValue().set(key, value, timeout, unit);
     }
 
     public Object getValue(Object key) {

@@ -1,6 +1,5 @@
 package com.mz.common.util;
 
-import com.alibaba.fastjson.JSON;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
@@ -33,7 +32,6 @@ public class WebTokenUtil {
     public static Map<String, Object> parserJavaWebToken(String jwt) {
         try {
             Map<String, Object> jwtClaims = Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(jwt).getBody();
-            System.out.println("jwtClaims=>" + JSON.toJSONString(jwtClaims));
             return jwtClaims;
         } catch (Exception e) {
             log.error("Token验证失败");
