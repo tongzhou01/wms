@@ -178,6 +178,21 @@
         SELECT MAX(SUBSTRING(c.customer_no,4)) FROM customer_info c WHERE c.is_deleted = 0
     </select>
     <select id="selectByCustomerNo" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/> FROM customer_info WHERE is_deleted = 0 AND customer_no = #{customerNo}
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM customer_info WHERE is_deleted = 0 AND customer_no = #{customerNo}
     </select>
+    <update id="dealBalance">
+        UPDATE customer_info SET
+        <choose>
+            <when test="type == 1">
+                balance = balance + #{money},
+                total_amount = total_amount + #{money}
+            </when>
+            <otherwise>
+                balance = balance - #{money}
+            </otherwise>
+        </choose>
+        WHERE is_deleted = 0 AND id = #{id}
+    </update>
 </mapper>

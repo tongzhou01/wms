@@ -9,6 +9,7 @@ import com.mz.common.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -125,4 +126,18 @@ public class CustomerInfoController {
         return CommonUtil.msg(ids, i);
     }
 
+    /**
+     * 加/扣钱
+     * @param type
+     * @param money
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/deal_balance", method = RequestMethod.POST)
+    public R dealBalance(@RequestParam Integer type,
+                         @RequestParam BigDecimal money,
+                         @RequestParam Long id
+                         ) {
+        return customerInfoService.dealBalance(id, money, type);
+    }
 }
