@@ -88,8 +88,10 @@ public class CargoOperateController {
         }
         cargoInfo.setGmtCreate(new Date());
         Random random = new Random();
-        long randomNum = WXPayUtil.getCurrentTimestampMs() + random.nextInt(4);
-        cargoInfo.setOrderNo("MZ" + randomNum);
+        if (type == 0) {
+            long randomNum = WXPayUtil.getCurrentTimestampMs() + random.nextInt(4);
+            cargoInfo.setOrderNo("MZ" + randomNum);
+        }
         int i = cargoInfoService.insertSelective(cargoInfo);
         Long id = cargoInfo.getId();
         if (id != null && id > 0) {
@@ -100,6 +102,7 @@ public class CargoOperateController {
             operateRecord.setType(type);
             operateRecordService.insertSelective(operateRecord);
         }
+
         return CommonUtil.msg(i);
     }
 

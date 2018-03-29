@@ -27,14 +27,15 @@
         <result column="package_type_id" jdbcType="BIGINT" property="packageTypeId"/>
         <result column="product_type_id" jdbcType="BIGINT" property="productTypeId"/>
     </resultMap>
-    <resultMap id="CargoDetail" type="com.mz.admin.model.CargoDetailVO" autoMapping="true">
+    <resultMap id="CargoDetail" type="com.mz.admin.model.CargoDetailVO" extends="BaseResultMap">
         <association property="customerInfo" javaType="com.mz.admin.entity.CustomerInfo" autoMapping="true">
             <id column="customer_id" jdbcType="BIGINT" property="id"/>
         </association>
-        <collection property="operateRecords" ofType="com.mz.admin.entity.OperateRecord">
+        <association property="operateRecord" javaType="com.mz.admin.entity.OperateRecord">
+            <id column="operate_record_id" jdbcType="BIGINT" property="id"/>
             <result column="scan_time" jdbcType="TIMESTAMP" property="scanTime"/>
             <result column="type" jdbcType="TINYINT" property="type"/>
-        </collection>
+        </association>
     </resultMap>
     <sql id="Base_Column_List">
         id, cn_no, intl_no, order_no, customer_no, express_company_code, express_company,express_company_code_en, express_company_en,
@@ -314,9 +315,22 @@
         ci.customer_company,
         ci.customer_mobile,
         ci.balance,
-        ci.total_amount
-        FROM cargo_info c,operate_record o, customer_info ci
-        WHERE c.id = o.cargo_id AND ci.customer_no = c.customer_no AND c.is_deleted = 0
+        ci.total_amount,
+        pk.name_cn,
+        pd.product_name,
+        ec.company_name
+        FROM cargo_info c
+        LEFT JOIN
+        operate_record o ON c.id = o.cargo_id
+        LEFT JOIN
+        customer_info ci ON ci.customer_no = c.customer_no
+        LEFT JOIN
+        package_type pk ON pk.id = c.package_type_id
+        LEFT JOIN
+        product_type pd ON pd.id = product_type_id
+        LEFT JOIN
+        express_company ec ON c.express_company_code = ec.company_code
+        WHERE c.is_deleted = 0
         <if test="type != null">
             AND o.type = #{type}
         </if>
@@ -329,6 +343,9 @@
         <if test="customerMobile != null">
             AND ci.customer_mobile LIKE CONCAT("%",#{customerMobile},"%")
         </if>
+        <if test="shelfNo != null">
+            AND c.shelf_no LIKE CONCAT("%",#{shelfNo},"%")
+        </if>
         <if test="startDate != null and endDate != null">
             AND c.gmt_create <![CDATA[>=]]> #{startDate}
             AND c.gmt_create <![CDATA[<=]]> #{endDate}
@@ -339,8 +356,16 @@
         </if>
     </select>
     <select id="count" resultType="java.lang.Integer">
-        SELECT count(1) FROM cargo_info c,operate_record o, customer_info ci WHERE c.id = o.cargo_id AND ci.customer_no
-        = c.customer_no AND c.is_deleted = 0
+        SELECT
+        count(1)
+        FROM cargo_info c LEFT JOIN operate_record o ON c.id = o.cargo_id
+        LEFT JOIN
+        customer_info ci ON ci.customer_no = c.customer_no
+        LEFT JOIN
+        package_type pk ON pk.id = c.package_type_id
+        LEFT JOIN
+        product_type pd ON pd.id = product_type_id
+        WHERE c.is_deleted = 0
         <if test="type != null">
             AND o.type = #{type}
         </if>
@@ -361,6 +386,7 @@
     <select id="getDetail" resultMap="CargoDetail">
         SELECT
         c.*,
+        o.id operate_record_id,
         o.type,
         o.scan_time,
         ci.customer_name,
@@ -370,8 +396,10 @@
         ci.customer_mobile,
         ci.balance,
         ci.total_amount
-        FROM cargo_info c,operate_record o, customer_info ci
-        WHERE c.id = o.cargo_id AND ci.customer_no = c.customer_no AND c.is_deleted = 0 AND c.shelf_no = #{shelfNo}
+        FROM cargo_info c
+        LEFT JOIN operate_record o ON c.id = o.cargo_id
+        LEFT JOIN customer_info ci ON ci.customer_no = c.customer_no
+        WHERE c.is_deleted = 0 AND c.shelf_no = #{shelfNo}
         <if test="orderNo != null">
             AND c.order_no LIKE CONCAT("%",#{orderNo},"%")
         </if>

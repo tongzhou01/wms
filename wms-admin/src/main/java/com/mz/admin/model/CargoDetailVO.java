@@ -4,8 +4,6 @@ import com.mz.admin.entity.CargoInfo;
 import com.mz.admin.entity.CustomerInfo;
 import com.mz.admin.entity.OperateRecord;
 
-import java.util.List;
-
 /**
  * 货物-货架信息
  *
@@ -14,16 +12,16 @@ import java.util.List;
  **/
 public class CargoDetailVO extends CargoInfo {
 
-    List<OperateRecord> operateRecords;
+    OperateRecord operateRecord;
 
     CustomerInfo customerInfo;
 
-    public List<OperateRecord> getOperateRecords() {
-        return operateRecords;
+    public OperateRecord getOperateRecord() {
+        return operateRecord;
     }
 
-    public void setOperateRecords(List<OperateRecord> operateRecords) {
-        this.operateRecords = operateRecords;
+    public void setOperateRecord(OperateRecord operateRecord) {
+        this.operateRecord = operateRecord;
     }
 
     public CustomerInfo getCustomerInfo() {

@@ -11,7 +11,7 @@ import java.util.Date;
 public class CargoCharge implements IEntity {
     private Long id;
 
-    private Byte expireTime;
+    private Long expireTime;
 
     private BigDecimal cargoFee;
 
@@ -29,11 +29,11 @@ public class CargoCharge implements IEntity {
         this.id = id;
     }
 
-    public Byte getExpireTime() {
+    public Long getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(Byte expireTime) {
+    public void setExpireTime(Long expireTime) {
         this.expireTime = expireTime;
     }
 

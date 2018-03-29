@@ -3,7 +3,7 @@
 <mapper namespace="com.mz.admin.dao.CargoChargeDao">
     <resultMap id="BaseResultMap" type="com.mz.admin.entity.CargoCharge">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="expire_time" jdbcType="TINYINT" property="expireTime"/>
+        <result column="expire_time" jdbcType="BIGINT" property="expireTime"/>
         <result column="cargo_fee" jdbcType="DECIMAL" property="cargoFee"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify"/>
@@ -26,7 +26,7 @@
         insert into cargo_charge (id, expire_time, cargo_fee,
         gmt_create, gmt_modify, is_deleted
         )
-        values (#{id,jdbcType=BIGINT}, #{expireTime,jdbcType=TINYINT}, #{cargoFee,jdbcType=DECIMAL},
+        values (#{id,jdbcType=BIGINT}, #{expireTime,jdbcType=BIGINT}, #{cargoFee,jdbcType=DECIMAL},
         #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}
         )
     </insert>
@@ -57,7 +57,7 @@
                 #{id,jdbcType=BIGINT},
             </if>
             <if test="expireTime != null">
-                #{expireTime,jdbcType=TINYINT},
+                #{expireTime,jdbcType=BIGINT},
             </if>
             <if test="cargoFee != null">
                 #{cargoFee,jdbcType=DECIMAL},
@@ -77,7 +77,7 @@
         update cargo_charge
         <set>
             <if test="expireTime != null">
-                expire_time = #{expireTime,jdbcType=TINYINT},
+                expire_time = #{expireTime,jdbcType=BIGINT},
             </if>
             <if test="cargoFee != null">
                 cargo_fee = #{cargoFee,jdbcType=DECIMAL},
@@ -96,7 +96,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.CargoCharge">
         update cargo_charge
-        set expire_time = #{expireTime,jdbcType=TINYINT},
+        set expire_time = #{expireTime,jdbcType=BIGINT},
         cargo_fee = #{cargoFee,jdbcType=DECIMAL},
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
