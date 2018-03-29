@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2018-03-14 11:41
  **/
 @Controller
-@RequestMapping("/api/barcode")
+@RequestMapping("/barcode")
 public class BarcodeController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
