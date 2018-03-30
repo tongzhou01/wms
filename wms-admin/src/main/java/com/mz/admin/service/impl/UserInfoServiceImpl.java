@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserInfoService {
@@ -51,6 +52,7 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
                 return R.error("用户名或密码错误");
             }
             String token = WebTokenUtil.createJavaWebToken(userInfoMap);
+            redisCache.setValue(token, "1", 1, TimeUnit.DAYS);
             return CommonUtil.msg(userInfoMap).put("token", token);
         } else {
             return R.error(500, "验证码错误");
@@ -70,5 +72,13 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
 
         } catch (IOException e) {
         }
+    }
+
+    @Override
+    public void txTest(UserInfo userInfo) {
+        userInfoDao.insertSelective(userInfo);
+        System.out.println(111111111);
+        userInfo.setId(1l);
+        userInfoDao.insertSelective(userInfo);
     }
 }
