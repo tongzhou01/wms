@@ -36,11 +36,11 @@ public class LoginFilter implements Filter {
                 //System.out.println("登陆成功" + redisCache.getValue(token).toString());
                 chain.doFilter(req, resp);
             } else {
-                httpServletResponse.sendError(500, "登陆失败，解析失败");
+                httpServletResponse.sendError(401, "登陆失败，解析失败");
                 return;
             }
         } else {
-            httpServletResponse.sendError(500, "登陆失败,token为null");
+            httpServletResponse.sendError(401, "登陆失败,token为null");
             return;
         }
     }
