@@ -14,7 +14,9 @@
         http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
     <!-- 自动扫描 将标注Spring注解的类自动转化bean -->
-    <context:component-scan base-package="com.mz"/>
+    <context:component-scan base-package="com.mz">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -102,5 +104,5 @@
     <aop:aspectj-autoproxy proxy-target-class="true"  expose-proxy="true"/><!-- expose-proxy = true 使目标对象内部的自我调用也实现切面增强 -->
 
     <!-- 启用对事务注解的支持 -->
-    <tx:annotation-driven transaction-manager="txManager" />
+    <tx:annotation-driven transaction-manager="txManager"/>
 </beans>

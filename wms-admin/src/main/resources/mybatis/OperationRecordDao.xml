@@ -115,15 +115,15 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.mz.admin.entity.OperateRecord">
-    update operate_record
-    set cargo_id = #{cargoId,jdbcType=BIGINT},
+      update operate_record
+      set cargo_id = #{cargoId,jdbcType=BIGINT},
       operator = #{operator,jdbcType=BIGINT},
       scan_time = #{scanTime,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=TINYINT},
       outbound_type_id = #{outboundTypeId,jdbcType=BIGINT},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       shelf_no = #{shelfNo,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+      where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="index" resultType="java.util.Map">
         SELECT c.*,o.scan_time, o.type FROM operate_record o, cargo_info c WHERE o.cargo_id = c.id AND c.is_deleted = 0
@@ -132,6 +132,9 @@
         </if>
         <if test="orderNo != null">
             AND c.order_no LIKE CONCAT("%",#{orderNo},"%")
+        </if>
+        <if test="customerNo != null">
+            AND c.customer_no LIKE CONCAT("%",#{customerNo},"%")
         </if>
         <if test="cnNo != null">
             AND c.cn_no LIKE CONCAT("%",#{cnNo},"%")
