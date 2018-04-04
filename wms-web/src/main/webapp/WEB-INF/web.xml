@@ -71,6 +71,15 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
+    <servlet>
+        <servlet-name>dubbo</servlet-name>
+        <servlet-class>com.alibaba.dubbo.remoting.http.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dubbo</servlet-name>
+        <url-pattern>/test/*</url-pattern>
+    </servlet-mapping>
     <!-- shiro的filter -->
     <!--<filter>
         <filter-name>shiroFilter</filter-name>

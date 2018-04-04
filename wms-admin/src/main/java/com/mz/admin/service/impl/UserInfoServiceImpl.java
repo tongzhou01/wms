@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@com.alibaba.dubbo.config.annotation.Service
 public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserInfoService {
     @Autowired
     UserInfoDao userInfoDao;
@@ -75,10 +76,7 @@ public class UserInfoServiceImpl extends BaseService<UserInfo> implements UserIn
     }
 
     @Override
-    public void txTest(UserInfo userInfo) {
-        userInfoDao.insertSelective(userInfo);
-        System.out.println(111111111);
-        userInfo.setId(1l);
-        userInfoDao.insertSelective(userInfo);
+    public String txTest(String s) {
+        return s + " - provider";
     }
 }

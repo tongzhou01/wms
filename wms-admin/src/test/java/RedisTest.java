@@ -19,7 +19,7 @@ public class RedisTest {
 
     @Test
     public void test() {
-        redisCache.setValue("1","张三");
-        System.out.println(redisCache.getValue("1"));
+        //redisCache.setValue("1","张三");
+        System.out.println(redisCache.getValue("eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiIxIiwic2V4IjoxLCJyZWFsX25hbWUiOiLlmI7lmI4iLCJpZCI6MX0.JkvOZRmdhcmDvte2S_1W6FYnliTE_HBcUhwO8YKSHvc"));
     }
 }

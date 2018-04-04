@@ -11,5 +11,5 @@ public interface UserInfoService extends IService<UserInfo> {
 
     void imageCode(String uuid, HttpServletResponse response);
 
-    void txTest(UserInfo userInfo);
+    String txTest(String s);
 }

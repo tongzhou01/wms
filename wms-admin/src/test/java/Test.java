@@ -1,9 +1,9 @@
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @description 
  * @author tongzhou
+ * @description
  * @date 2018/3/8 11:30
  */
 public class Test {
@@ -13,20 +13,25 @@ public class Test {
         Test test = new Test();
         test.change(test.str);
         System.out.println(Math.random());
+
     }
+
     /**
+     * @param
      * @description
      * @author tongzhou
-     * @param
      * @date 2018/3/8
      */
-    public void change(String str) {/**
-     * @description 
-     * @author tongzhou
-     * @param [str]
-     * @date 2018/3/8 11:15
-     */
+    public void change(String str) {
+        /**
+         * @description
+         * @author tongzhou
+         * @param [str]
+         * @date 2018/3/8 11:15
+         */
         str = "10";
+        List list = new ArrayList();
+        System.out.println(list);
     }
 
 }
