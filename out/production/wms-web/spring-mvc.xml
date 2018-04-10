@@ -27,5 +27,5 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <import resource="classpath*:dubbo-provider.xml"/>
+    <!--<import resource="classpath*:dubbo-provider.xml"/>-->
 </beans>
