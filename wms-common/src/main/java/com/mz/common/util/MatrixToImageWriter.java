@@ -58,6 +58,11 @@ public class MatrixToImageWriter {
             throw new IOException("Could not write an image of format " + format);
         }
     }
+    public static void writeToStream(BufferedImage bufferedImage, String format, OutputStream stream) throws IOException {
+        if (!ImageIO.write(bufferedImage, format, stream)) {
+            throw new IOException("Could not write an image of format " + format);
+        }
+    }
 
     public static void createQr(String qrCode, int width, int height, BarcodeFormat barFormat, String format, HttpServletResponse response) {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
