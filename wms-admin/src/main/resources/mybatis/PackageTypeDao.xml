@@ -154,7 +154,7 @@
         select p.*,c.country_cn from package_type p,country c where p.is_deleted = 0 and p.country_id = c.id
         <if test="startDate != null and endDate != null">
             AND p.gmt_create <![CDATA[>=]]> #{startDate}
-            AND p.gmt_create <![CDATA[<=]]> #{startDate}
+            AND p.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
         <if test="countryCn != null">
             AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")
@@ -171,7 +171,7 @@
         select count(1) from package_type p,country c where p.is_deleted = 0 and p.country_id = c.id
         <if test="startDate != null and endDate != null">
             AND p.gmt_create <![CDATA[>=]]> #{startDate}
-            AND p.gmt_create <![CDATA[<=]]> #{startDate}
+            AND p.gmt_create <![CDATA[<=]]> #{endDate}
         </if>
         <if test="countryCn != null">
             AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")

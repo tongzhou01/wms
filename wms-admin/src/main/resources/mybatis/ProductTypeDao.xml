@@ -156,7 +156,7 @@
       where pd.is_deleted = 0 and p.country_id = c.id and pd.package_type=p.id
     <if test="startDate != null and endDate != null">
       AND pd.gmt_create <![CDATA[>=]]> #{startDate}
-      AND pd.gmt_create <![CDATA[<=]]> #{startDate}
+      AND pd.gmt_create <![CDATA[<=]]> #{endDate}
     </if>
     <if test="countryCn != null">
       AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")
@@ -175,7 +175,7 @@
       where pd.is_deleted = 0 and p.country_id = c.id and pd.package_type=p.id
     <if test="startDate != null and endDate != null">
       AND pd.gmt_create <![CDATA[>=]]> #{startDate}
-      AND pd.gmt_create <![CDATA[<=]]> #{startDate}
+      AND pd.gmt_create <![CDATA[<=]]> #{endDate}
     </if>
     <if test="countryCn != null">
       AND c.country_cn LIKE CONCAT("%",#{countryCn},"%")

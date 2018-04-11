@@ -412,7 +412,7 @@
         </if>
         ORDER BY o.scan_time DESC
         <if test="currentPage != null and pageSize!=null">
-            limit ${(currentPage-1) * pageSize},${pageSize}
+            LIMIT ${(currentPage-1) * pageSize},${pageSize}
         </if>
     </select>
     <select id="countDetail" resultType="java.lang.Integer">
