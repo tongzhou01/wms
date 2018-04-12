@@ -11,7 +11,6 @@ import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
-import com.mz.common.util.WXPayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,10 +87,10 @@ public class CargoOperateController {
         }
         cargoInfo.setGmtCreate(new Date());
         Random random = new Random();
-        if (type == 0) {
-            long randomNum = WXPayUtil.getCurrentTimestampMs() + random.nextInt(4);
+        /*if (type == 0) {
+            long randomNum = WXPayUtil.getCurrentTimestampMs() + random.nextInt(99);
             cargoInfo.setOrderNo("MZ" + randomNum);
-        }
+        }*/
         int i = cargoInfoService.insertSelective(cargoInfo);
         Long id = cargoInfo.getId();
         if (id != null && id > 0) {
@@ -102,7 +101,6 @@ public class CargoOperateController {
             operateRecord.setType(type);
             operateRecordService.insertSelective(operateRecord);
         }
-
         return CommonUtil.msg(i);
     }
 

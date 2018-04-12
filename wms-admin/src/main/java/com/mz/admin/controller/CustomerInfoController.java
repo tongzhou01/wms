@@ -1,8 +1,10 @@
 package com.mz.admin.controller;
 
 import com.mz.admin.entity.CustomerInfo;
+import com.mz.admin.service.CargoInfoService;
 import com.mz.admin.service.CustomerInfoService;
 import com.mz.common.entity.Example;
+import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.IService;
 import com.mz.common.util.CommonUtil;
@@ -28,6 +30,8 @@ public class CustomerInfoController {
     CustomerInfoService customerInfoService;
     @Autowired
     IService<Map<String, Object>> baseService;
+    @Autowired
+    CargoInfoService cargoInfoService;
 
     /**
      * 分页查询
@@ -69,6 +73,32 @@ public class CustomerInfoController {
         example.setOrderBy("gmt_create desc");
         int total = baseService.count(example);
         List<Map<String, Object>> list = baseService.find(example);
+        return CommonUtil.msg(list).put("total", total);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "list_detail", method = RequestMethod.POST)
+    public R list(@RequestBody QueryParam param) {
+        int total = customerInfoService.count(param);
+        List<Map> list = customerInfoService.selectCustomerDetail(param);
+        return CommonUtil.msg(list).put("total", total);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "list_batch", method = RequestMethod.POST)
+    public R listBatch(@RequestBody QueryParam param) {
+        int total = cargoInfoService.count(param);
+        List<Map> list = customerInfoService.selectCargoBatch(param);
         return CommonUtil.msg(list).put("total", total);
     }
 

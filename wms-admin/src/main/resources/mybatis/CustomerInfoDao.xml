@@ -195,4 +195,92 @@
         </choose>
         WHERE is_deleted = 0 AND id = #{id}
     </update>
+    <select id="selectCustomerDetail" resultType="java.util.Map">
+        SELECT
+            ci.*,
+            IFNULL(a.in,0) in_count,
+            IFNULL(a.out,0) out_count,
+            IFNULL(a.express_charge,0) total_express_charge,
+            IFNULL(a.cargo_charge,0) total_cargo_charge,
+            a.batchCount
+        FROM
+            customer_info ci
+        LEFT JOIN (
+            SELECT
+                c.customer_no,
+                SUM(express_charge) express_charge,
+                SUM(cargo_charge) cargo_charge ,
+                SUM(CASE WHEN op.type = 0 THEN 1 ELSE 0 END) `in`,
+                SUM(CASE WHEN op.type = 1 THEN 1 ELSE 0 END) `out`,
+                COUNT(DISTINCT c.order_no) batchCount
+            FROM
+                cargo_info c, operate_record op
+            WHERE
+                op.cargo_id = c.id
+            AND
+                c.is_deleted = 0
+            GROUP BY
+                c.customer_no) a
+        ON
+            a.customer_no = ci.customer_no
+        WHERE
+            ci.is_deleted = 0
+        <if test="customerNo != null">
+            AND ci.customer_no LIKE CONCAT('%', #{customerNo}, '%')
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND ci.gmt_create <![CDATA[>=]]> #{startDate}
+            AND ci.gmt_create <![CDATA[<=]]> #{endDate}
+        </if>
+        ORDER BY
+            total_express_charge DESC
+        <if test="currentPage != null and pageSize!=null">
+            LIMIT ${(currentPage-1) * pageSize},${pageSize}
+        </if>
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(1) FROM customer_info
+        <where>
+            <if test="customerNo != null">
+                AND customer_no LIKE CONCAT('%', #{customerNo}, '%')
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND gmt_create <![CDATA[>=]]> #{startDate}
+                AND gmt_create <![CDATA[<=]]> #{endDate}
+            </if>
+        </where>
+    </select>
+    <select id="selectCargoBatch" resultType="java.util.Map">
+        SELECT
+          c.customer_no,
+          c.order_no,
+          c.gmt_create,
+          SUM(IFNULL(express_charge,0)) express_charge,
+          SUM(IFNULL(cargo_charge,0)) cargo_charge ,
+          SUM(CASE WHEN op.type = 1 THEN 1 ELSE 0 END) sendCount
+        FROM
+          cargo_info c,
+          operate_record op
+        <where>
+              op.cargo_id = c.id
+            AND
+              c.is_deleted = 0
+            AND
+              op.type = 1
+            <if test="customerNo != null">
+                AND customer_no = #{customerNo}
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND gmt_create <![CDATA[>=]]> #{startDate}
+                AND gmt_create <![CDATA[<=]]> #{endDate}
+            </if>
+        </where>
+        GROUP BY
+          c.order_no
+        ORDER BY
+          express_charge DESC
+        <if test="currentPage != null and pageSize != null">
+            LIMIT ${(currentPage-1) * pageSize},${pageSize}
+        </if>
+    </select>
 </mapper>

@@ -4,6 +4,7 @@ import com.mz.admin.dao.CustomerInfoDao;
 import com.mz.admin.entity.CustomerInfo;
 import com.mz.admin.service.CustomerInfoService;
 import com.mz.common.dao.IDao;
+import com.mz.common.entity.QueryParam;
 import com.mz.common.entity.R;
 import com.mz.common.service.BaseService;
 import com.mz.common.util.CommonUtil;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class CustomerInfoServiceImpl extends BaseService<CustomerInfo> implements CustomerInfoService {
@@ -44,5 +47,15 @@ public class CustomerInfoServiceImpl extends BaseService<CustomerInfo> implement
         }
         int i = customerInfoDao.dealBalance(id, money, type);
         return CommonUtil.msg(i);
+    }
+
+    @Override
+    public List<Map> selectCustomerDetail(QueryParam param) {
+        return customerInfoDao.selectCustomerDetail(param);
+    }
+
+    @Override
+    public List<Map> selectCargoBatch(QueryParam param) {
+        return customerInfoDao.selectCargoBatch(param);
     }
 }
