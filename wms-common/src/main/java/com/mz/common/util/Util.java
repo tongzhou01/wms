@@ -32,7 +32,7 @@ public class Util {
         req.setExtend("");
         req.setSmsType("normal");
         req.setSmsFreeSignName("明彰");
-        req.setSmsParamString("{code:'" + ranCode + "',product:'明彰'}");
+        req.setSmsParamString("{code:'" + ranCode + "',producer:'明彰'}");
         req.setRecNum(phone);
         req.setSmsTemplateCode("SMS_13230957");//SMS_14245647：您好，你的验证码为${code}，请不要告诉任何人！
         AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);

@@ -105,4 +105,6 @@
 
     <!-- 启用对事务注解的支持 -->
     <tx:annotation-driven transaction-manager="txManager"/>
+
+    <import resource="classpath*:spring-activemq.xml"/>
 </beans>

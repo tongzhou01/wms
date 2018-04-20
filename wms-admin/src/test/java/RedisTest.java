@@ -1,4 +1,5 @@
 import com.mz.common.component.RedisCache;
+import com.mz.mq.component.Producer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class RedisTest {
     @Autowired
     RedisCache redisCache;
+    @Autowired
+    Producer producer;
 
     @Test
     public void test() {
         //redisCache.setValue("1","张三");
-        System.out.println(redisCache.getValue("eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiIxIiwic2V4IjoxLCJyZWFsX25hbWUiOiLlmI7lmI4iLCJpZCI6MX0.JkvOZRmdhcmDvte2S_1W6FYnliTE_HBcUhwO8YKSHvc"));
+        for (int i = 0; i < 10000; i++) {
+            producer.sendQueueMsg(i);
+        }
     }
 }

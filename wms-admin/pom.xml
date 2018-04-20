@@ -14,9 +14,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mingz-tech.wms</groupId>
-            <artifactId>wms-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <groupId>com.mingz-tech.wms</groupId>
+        <artifactId>wms-common</artifactId>
+        <version>${project.version}</version>
+    </dependency>
     </dependencies>
 </project>

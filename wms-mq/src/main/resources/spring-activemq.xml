@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/jms
+       http://www.springframework.org/schema/jms/spring-jms-4.0.xsd">
+    <!-- activemq 配置 -->
+    <!-- 配置连接工厂 -->
+    <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <!-- 配置消息服务中间件地址 -->
+        <property name="brokerURL" value="tcp://127.0.0.1:61616"></property>
+        <!-- 配置用户名和密码 -->
+        <property name="userName" value="admin"></property>
+        <property name="password" value="admin"></property>
+    </bean>
+
+    <!-- 配置工厂连接池 -->
+    <bean id="pooledConnectionFactoryBean" class="org.apache.activemq.pool.PooledConnectionFactoryBean">
+        <!-- 注入连接工厂bean -->
+        <property name="connectionFactory" ref="activeMQConnectionFactory"/>
+    </bean>
+
+    <!-- 使用spring来进行管理 -->
+    <bean id="cachingConnectionFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <!-- 注入连接工厂连接池的bean -->
+        <property name="targetConnectionFactory" ref="pooledConnectionFactoryBean"/>
+        <!-- Session缓存数量 -->
+        <property name="sessionCacheSize" value="100"/>
+    </bean>
+    <!-- 消息生产者 start-->
+
+    <!-- 配置jmsQueueTemplate -->
+    <bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 注入使用spring来进行管理的bean -->
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
+        <property name="pubSubDomain" value="false"/>
+    </bean>
+
+    <!-- 配置jmsTopicTemplate -->
+    <bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 注入使用spring来进行管理的bean -->
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
+        <property name="pubSubDomain" value="true"/>
+    </bean>
+
+    <!-- 消息生产者 end-->
+
+    <!-- 消息消费者 start-->
+
+    <!-- 定义Queue监听器 -->
+    <jms:listener-container destination-type="queue" container-type="default"
+                            connection-factory="cachingConnectionFactory" acknowledge="auto">
+        <jms:listener destination="test.queue.int" ref="consumer"/>
+    </jms:listener-container>
+
+    <!-- 定义Topic监听器 -->
+    <jms:listener-container destination-type="topic" container-type="default"
+                            connection-factory="cachingConnectionFactory" acknowledge="auto">
+        <!--<jms:listener destination="test.topic" ref="topicReceiver1"/>-->
+    </jms:listener-container>
+
+    <!-- 消息消费者 end -->
+</beans>

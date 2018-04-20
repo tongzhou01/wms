@@ -25,15 +25,10 @@
         <!-- 依赖 -->
         <dependency>
             <groupId>com.mingz-tech.wms</groupId>
-            <artifactId>wms-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mingz-tech.wms</groupId>
             <artifactId>wms-admin</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>wms</finalName>

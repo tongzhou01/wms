@@ -1,5 +1,8 @@
+import com.mz.common.util.WXPayUtil;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author tongzhou
@@ -12,8 +15,12 @@ public class Test {
     public static void main(String[] args) {
         Test test = new Test();
         test.change(test.str);
-        System.out.println(Math.random());
-
+        Random random = new Random();
+        long currentTimestampMs = WXPayUtil.getCurrentTimestampMs();
+        int i = random.nextInt(99);
+        System.out.println(currentTimestampMs);
+        System.out.println(i);
+        System.out.println(currentTimestampMs + i);
     }
 
     /**

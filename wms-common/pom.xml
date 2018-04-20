@@ -19,5 +19,11 @@
             <artifactId>dayu</artifactId>
             <version>20160607</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.mingz-tech.wms</groupId>
+            <artifactId>wms-mq</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
